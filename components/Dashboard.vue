@@ -10,7 +10,7 @@
                 <StepPanel v-slot="{ activateCallback }" value="1">
                     <div class="border-2 border-dashed">
                     <div class="flex flex-col h-full">
-                        <div class=" border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                        <div class=" border-gray-200  rounded bg-gray-50  flex-auto flex justify-center items-center font-medium">
                             <div class="card flex justify-center py-10">
                                 <div class="flex flex-col gap-2">
                                     <label for="username">Username</label>
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex p-4 justify-end">
+                    <div class="flex p-4 justify-end bg-gray-50 ">
                         <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                 <StepPanel v-slot="{ activateCallback }" value="2">
                     <div class="border-2 border-dashed">
                     <div class="flex flex-col h-full">
-                        <div class=" border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                        <div class=" border-gray-200  rounded bg-gray-50  flex-auto flex justify-center items-center font-medium">
                             <div class="card py-10">
                                 <Toast />
                                 <FileUpload name="demo[]" url="/api/upload" @upload="onTemplatedUpload" :multiple="true" accept="image/*" :maxFileSize="1000000" @select="onSelectedFiles">
@@ -45,7 +45,7 @@
                                             <div v-if="files.length > 0">
                                                 <h5>Files to Upload</h5>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
+                                                    <div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="p-8 rounded-border flex flex-col border border-gray items-center gap-4">
                                                         <div>
                                                             <img role="presentation" :alt="file.name" :src="file.objectURL" width="70" height="30" />
                                                         </div>
@@ -59,7 +59,7 @@
                                             <div v-if="uploadedFiles.length > 0">
                                                 <h5>Completed</h5>
                                                 <div class="flex flex-wrap gap-2">
-                                                    <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
+                                                    <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="p-8 rounded-border flex flex-col border border-gray items-center gap-4">
                                                         <div>
                                                             <img role="presentation" :alt="file.name" :src="file.objectURL" width="100" height="50" />
                                                         </div>
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex p-4 justify-between">
+                    <div class="flex p-4 justify-between bg-gray-50 ">
                         <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('1')" />
                         <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep2(activateCallback)" />
                     </div>
@@ -92,7 +92,8 @@
                 <StepPanel v-slot="{ activateCallback }" value="3">
                     <div class="border-2 border-dashed">
                     <div class="flex flex-col h-full">
-                        <div class=" border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium">
+                        <div class="
+                         border-gray-200  rounded bg-gray-50  flex-auto flex justify-center items-center font-medium">
                             <div class="card flex justify-center py-10">
                                 <div class="flex flex-col gap-2">
                                     <label for="username">ADDRESS</label>
@@ -102,7 +103,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-4">
+                    <div class="p-4 bg-gray-50 ">
                         <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('2')" />
                     </div>
                     </div>
