@@ -6,6 +6,7 @@
             <div class="flex flex-col h-full">
                 <div class="flex items-center p-4 flex-shrink-0 h-[60px]">
                   <img src="@/public/images.jpg" alt="">
+                 
                 </div>
                 <div class="overflow-y-auto">
                     <ul class="list-none p-4 m-0 bg-white">
@@ -25,7 +26,8 @@
                                 <li>
                                     <a @click="setSelectedItem('dashboard')"
                                         class="flex items-center cursor-pointer p-4 rounded-border text-gray-700  hover:bg-gray-100  duration-150 transition-colors">
-                                        <i class="pi pi-home mr-2 !text-xl !leading-none" />
+                                        <!-- <i class="pi pi-home mr-2 !text-xl !leading-none" /> -->
+                                        <img src="@/public/home1.gif" alt="" height="30" width="30">
                                         <span class="font-medium">Dashboard</span>
                                     </a>
                                 </li>

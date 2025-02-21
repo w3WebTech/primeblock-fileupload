@@ -9,114 +9,107 @@
             <StepPanels>
                 <StepPanel v-slot="{ activateCallback }" value="1">
                     <div class="border-2 border-dashed">
-                    <div class="flex flex-col h-full">
-                        <div class=" border-gray-200  rounded bg-gray-50  flex-auto flex justify-center items-center font-medium">
-                            <div class="card flex justify-center py-10">
-                                <div class="flex flex-col gap-2">
-                                    <label for="username">Username</label>
-                                    <InputText id="username" v-model="Username" aria-describedby="username-help" />
-                              
+                        <div class="flex flex-col h-full">
+                            <div class="border-gray-200 rounded bg-gray-50 flex-auto flex justify-center items-center font-medium">
+                                <div class="card flex justify-center py-10">
+                                    <div class="flex flex-col gap-2">
+                                        <label for="username">Username</label>
+                                        <InputText id="username" v-model="Username" aria-describedby="username-help" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="flex p-4 justify-end bg-gray-50 ">
+                            <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
+                        </div>
                     </div>
-                    <div class="flex p-4 justify-end bg-gray-50 ">
-                        <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
-                    </div>
-                </div>
                 </StepPanel>
 
                 <StepPanel v-slot="{ activateCallback }" value="2">
-                    <div class="border-2 border-dashed">
-                    <div class="flex flex-col h-full">
-                        <div class=" border-gray-200  rounded bg-gray-50  flex-auto flex justify-center items-center font-medium">
-                            <div class="card py-10">
-                                <Toast />
-                                <FileUpload name="demo[]" url="/api/upload" @upload="onTemplatedUpload" :multiple="true" accept="image/*" :maxFileSize="1000000" @select="onSelectedFiles">
-                                    <template #header="{ chooseCallback, uploadCallback, clearCallback, files }">
-                                        <div class="gap-">
-                                            <div class="flex gap-2">
-                                                <Button @click="chooseCallback()" icon="pi pi-images" rounded outlined severity="secondary"></Button>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <template #content="{ files, uploadedFiles, removeUploadedFileCallback, removeFileCallback }">
-                                        <div class="flex flex-col gap-4 pt-1">
-                                            <div v-if="files.length > 0">
-                                                <h5>Files to Upload</h5>
-                                                <div class="flex flex-wrap gap-2">
-                                                    <div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="p-8 rounded-border flex flex-col border border-gray items-center gap-4">
-                                                        <div>
-                                                            <img role="presentation" :alt="file.name" :src="file.objectURL" width="70" height="30" />
-                                                        </div>
-                                                        <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{{ file.name }}</span>
-                                                        <div>{{ formatSize(file.size) }}</div>
-                                                        <Button icon="pi pi-times" @click="onRemoveTemplatingFile(file, removeFileCallback, index)" outlined rounded severity="danger" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div v-if="uploadedFiles.length > 0">
-                                                <h5>Completed</h5>
-                                                <div class="flex flex-wrap gap-2">
-                                                    <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="p-8 rounded-border flex flex-col border border-gray items-center gap-4">
-                                                        <div>
-                                                            <img role="presentation" :alt="file.name" :src="file.objectURL" width="100" height="50" />
-                                                        </div>
-                                                        <span class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden">{{ file.name }}</span>
-                                                        <div>{{ formatSize(file.size) }}</div>
-                                                        <Badge value="Completed" class="mt-4" severity="success" />
-                                                        <Button icon="pi pi-times" @click="removeUploadedFileCallback(index)" outlined rounded severity="danger" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <template #empty>
-                                        <div class="flex items-center justify-center flex-col">
-                                            <i class="pi pi-cloud-upload !border-2 !rounded-full !p-5 !text-4xl !text-muted-color" />
-                                            <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
-                                        </div>
-                                    </template>
-                                </FileUpload>
+                    <div class="border-2 border-dashed ">
+                        <div class="flex flex-col h-full ">
+                            <div class="border-gray-200 rounded bg-gray-50 flex-auto flex justify-center items-center font-medium">
+                                <div class="card flex gap-6 items-center justify-center py-10">
+                                    <Toast />
+                                    <FileUpload
+                                        ref="fileupload"
+                                        mode="basic"
+                                        name="demo[]"
+                                        url="/api/upload"
+                                        accept=".png,.jpg,.jpeg,.pdf"
+                                        :maxFileSize="1000000"
+                                        @upload="onUpload"
+                                        @select="onSelectedFiles"
+                                        :files="files"
+                                    />
+                                    
+                                    <!-- Conditionally render the View and Remove buttons -->
+                                    <div v-if="files.length > 0" class="flex gap-2 mt-4">
+                                        <Button icon="pi pi-eye" severity="info" class="rounded" @click="showPreview" />
+                                        <Button icon="pi pi-times" @click="removeFile" severity="danger" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="flex p-4 justify-between bg-gray-50 ">
+                            <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('1')" />
+                            <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep2(activateCallback)" />
+                        </div>
                     </div>
-                    <div class="flex p-4 justify-between bg-gray-50 ">
-                        <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('1')" />
-                        <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep2(activateCallback)" />
-                    </div>
-                </div>
                 </StepPanel>
 
                 <StepPanel v-slot="{ activateCallback }" value="3">
                     <div class="border-2 border-dashed">
-                    <div class="flex flex-col h-full">
-                        <div class="
-                         border-gray-200  rounded bg-gray-50  flex-auto flex justify-center items-center font-medium">
-                            <div class="card flex justify-center py-10">
-                                <div class="flex flex-col gap-2">
-                                    <label for="username">ADDRESS</label>
-                                    <Textarea v-model="value" rows="5" cols="30" />
-                                
+                        <div class="flex flex-col h-full">
+                            <div class="border-gray-200 rounded bg-gray-50 flex-auto flex justify-center items-center font-medium">
+                                <div class="card flex justify-center py-10">
+                                    <div class="flex flex-col gap-2">
+                                        <label for="address">ADDRESS</label>
+                                        <Textarea v-model="address" rows="5" cols="30" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-gray-50 ">
-                        <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('2')" />
-                    </div>
+                        <div class="p-4 bg-gray-50 ">
+                            <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="activateCallback('2')" />
+                        </div>
                     </div>
                 </StepPanel>
             </StepPanels>
         </Stepper>
     </div>
+
+    <Dialog v-model:visible="previewVisible" header="File Preview" :style="{ width: '50rem' }">
+        <div v-for="file in files" :key="file.name" class="mb-4">
+            <div v-if="file && file.type && file.type.startsWith('image/')">
+                <img :src="file.objectURL" alt="Preview" class="w-full h-auto" />
+            </div>
+            <div v-else-if="file && file.type === 'application/pdf'">
+                <iframe :src="file.objectURL" class="w-full h-96" frameborder="0"></iframe>
+            </div>
+            <div v-else>
+                <p>Unsupported file type: {{ file.name }}</p>
+            </div>
+        </div>
+        <div class="flex justify-end">
+            <Button label="Close" @click="closePreview" />
+        </div>
+    </Dialog>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { usePrimeVue } from 'primevue/config';
 import { useToast } from 'primevue/usetoast';
+import Toast from 'primevue/toast';
+import FileUpload from 'primevue/fileupload';
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
+import Stepper from 'primevue/stepper';
+import Step from 'primevue/step';
+import StepList from 'primevue/steplist';
+import StepPanel from 'primevue/steppanel';
 
 const Username = ref(null);
 const address = ref(null);
@@ -126,6 +119,9 @@ const totalSize = ref(0);
 const totalSizePercent = ref(0);
 const $primevue = usePrimeVue();
 const toast = useToast();
+
+const visible = ref(false);
+const previewVisible = ref(false);
 
 const formatSize = (bytes) => {
     const k = 1024;
@@ -142,7 +138,6 @@ const formatSize = (bytes) => {
     return `${formattedSize} ${sizes[i]}`;
 };
 
-// Step 1 Validation
 const validateStep1 = (activateCallback) => {
     if (!Username.value) {
         toast.add({ severity: 'error', summary: 'Error', detail: 'Please enter a username.', life: 3000 });
@@ -151,9 +146,7 @@ const validateStep1 = (activateCallback) => {
     }
 };
 
-// Step 2 Validation
 const validateStep2 = (activateCallback) => {
-    // Check if files are empty after removing any files
     if (files.value.length === 0) {
         toast.add({ severity: 'error', summary: 'Error', detail: 'Please upload at least one file.', life: 3000 });
     } else {
@@ -161,31 +154,25 @@ const validateStep2 = (activateCallback) => {
     }
 };
 
-// File Upload Methods
-const onRemoveTemplatingFile = (file, removeFileCallback, index) => {
-    removeFileCallback(index);
-    // Manually re-check files after removal
-    if (files.value.length === 0) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Please upload at least one file.', life: 3000 });
-    }
-    files.value=[];
-    totalSize.value -= parseInt(formatSize(file.size));
-    totalSizePercent.value = totalSize.value / 10;
-};
-
 const onSelectedFiles = (event) => {
     files.value = event.files.map((file) => ({
         ...file,
+        objectURL: URL.createObjectURL(file) // Create a URL for preview
     }));
-    files.value.forEach((file) => {
-        totalSize.value += parseInt(formatSize(file.size));
-    });
 };
 
-const onTemplatedUpload = () => {
-    uploadedFiles.value = [...uploadedFiles.value, ...files.value];
-    files.value = [];
-    toast.add({ severity: 'info', summary: 'Success', detail: 'Files uploaded', life: 3000 });
+const removeFile = () => {
+    files.value = []; // Clear the files array
+    $refs.fileupload.clear(); // Clear the FileUpload component
+    toast.add({ severity: 'info', summary: 'Success', detail: 'Files removed successfully', life: 3000 });
+};
+
+const showPreview = () => {
+    previewVisible.value = true; // Show the preview dialog
+};
+
+const closePreview = () => {
+    previewVisible.value = false; // Hide the preview dialog
 };
 
 </script>
