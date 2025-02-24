@@ -78,7 +78,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import Checkbox from 'primevue/checkbox';
-
+import 'primeicons/primeicons.css';
 const activeTab2 = ref(0);
 const isSidebarOpen = ref(false); // Initially closed
 const isFixedSidebar = ref(false); // Sidebar is not fixed initially
