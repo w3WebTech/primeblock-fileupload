@@ -39,15 +39,30 @@
             </a>
           </div>
         </div>
-        <div id="app-sidebar-10"
-          class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface bg-[#3B55C4] px-1 py-6"
-          :class="{
-            'w-[230px] opacity-100 fade-in': isSidebarOpen || isFixedSidebar, // When open, full width and fully visible
-            'w-0 opacity-0 fade-out delay-150': !isSidebarOpen && !isFixedSidebar, // When closed, zero width and fully transparent
-            'transition-all duration-3000 delay-150 ease-in-out': isSidebarOpen || isFixedSidebar, // 1-second smooth transition for all properties
-            'lg:block': isFixedSidebar || isSidebarOpen, // Show for large screens when sidebar is open
-            'lg:hidden': !isFixedSidebar && !isSidebarOpen // Hide for large screens when sidebar is closed
-          }" @mouseenter="openSidebar" @mouseleave="handleMouseLeave">
+        <div
+  id="app-sidebar-10"
+  class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface bg-[#3B55C4] px-1 py-6"
+  :class="{
+    // For when the sidebar is open or fixed, apply the full width and full opacity with sliding and fade-in effect
+    'w-[230px] opacity-100 transform translate-x-0': isSidebarOpen || isFixedSidebar,
+
+    // For when the sidebar is closed, apply zero width, full transparency, and sliding effect to the left
+    'w-0 opacity-0 transform -translate-x-full': !isSidebarOpen && !isFixedSidebar,
+
+    // Smooth transition for width, opacity, and transform with a slight delay
+    'transition-all duration-500 ease-in-out': isSidebarOpen || isFixedSidebar,
+
+    // Additional animation for a smooth fade-in/fade-out effect
+    'lg:block': isFixedSidebar || isSidebarOpen, // Show for large screens when sidebar is open
+    'lg:hidden': !isFixedSidebar && !isSidebarOpen // Hide for large screens when sidebar is closed
+  }"
+  @mouseenter="openSidebar"
+  @mouseleave="handleMouseLeave">
+  
+  <!-- Sidebar content goes here -->
+
+</div>
+
 
 
 
@@ -94,6 +109,7 @@
                     ">
   <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
 </svg>
+
 
 
                   </span>
