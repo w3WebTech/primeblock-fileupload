@@ -92,7 +92,7 @@
 
         <!-- Step 3 Panel -->
         <StepPanel v-slot="{ activateCallback }" value="3">
-          <div class="border-2 border-dashed">
+          <div class="border-2 border -dashed">
             <div class="flex flex-col h-full">
               <div class="border-gray-200 rounded bg-gray-50 flex-auto flex justify-center items-center font-medium">
                 <div class="card flex justify-center py-10">
@@ -110,24 +110,6 @@
         </StepPanel>
       </StepPanels>
     </Stepper>
-
-    <Dialog v-model:visible="previewVisible" header="File Preview" :style="{ width: '50rem' }">
-      <div v-for="file in files" :key="file.name" class="mb-4">
-        <div v-if="file && (file.type === 'image/png' || file.type === 'image/jpeg')">
-          <img :src="file.objectURL" alt="Preview" class="w-full h-auto" />
-        </div>
-        <div v-else-if="file && file.type === 'application/pdf'">
-          <iframe :src="file.objectURL" class="w-full h-96" frameborder="0"></iframe>
-        </div>
-        <div v-else>
-          <p>Unsupported file type: {{ file.name }}</p>
-        </div>
-      </div>
-
-      <div class="flex justify-end">
-        <Button label="Close" @click="closePreview" />
-      </div>
-    </Dialog>
   </div>
 </template>
 
@@ -155,6 +137,7 @@ const coordinates = ref(null);
 const fileUploadRef = ref(null);
 const toast = useToast();
 const isCameraActive = ref(false);
+const showCamera = ref(false);
 const capturedImage = ref(null);
 
 const validateStep1 = (activateCallback) => {
@@ -206,22 +189,32 @@ const closePreview = () => {
 };
 
 const startCamera = async () => {
-  debugger
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     const video = document.querySelector('video');
     video.srcObject = stream;
     isCameraActive.value = true;
+    showCamera.value = true;
   } catch (error) {
     console.error("Error accessing camera:", error);
-    if (error.name === "NotAllowedError") {
-      alert("Camera access was denied. Please allow camera access in your browser settings.");
-    } else if (error.name === "NotFoundError") {
-      alert("No camera device found. Please connect a camera.");
-    } else {
-      alert("An error occurred while trying to access the camera. Please check your settings.");
-    }
+    alert("Error accessing camera.");
   }
+};
+
+const toggleCamera = () => {
+  if (showCamera.value) {
+    stopCamera();
+  } else {
+    startCamera();
+  }
+};
+
+const stopCamera = () => {
+  const video = document.querySelector('video');
+  const stream = video.srcObject;
+  const tracks = stream?.getTracks();
+  tracks?.forEach(track => track.stop());
+  showCamera.value = false;
 };
 
 const captureImage = () => {
@@ -232,6 +225,13 @@ const captureImage = () => {
   const context = canvas.getContext('2d');
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   capturedImage.value = canvas.toDataURL('image/png');
+  stopCamera(); // Stop the camera after capture
+};
+
+const retakeCapture = () => {
+  capturedImage.value = null;
+  showCamera.value = false;
+  startCamera(); // Restart the camera
 };
 
 const getLocation = () => {
@@ -241,16 +241,10 @@ const getLocation = () => {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       };
-    }, (error) => {
-      console.error("Error getting location:", error);
-      alert("Please allow location access.");
     });
-  } else {
-    alert("Geolocation is not supported by this browser.");
   }
 };
 
-// Automatically request camera and location access when the component is mounted
 onMounted(() => {
   getLocation();
 });
