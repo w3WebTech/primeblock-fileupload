@@ -28,15 +28,15 @@
                 </div>
               </div>
             </div>
-            <div class=" mt-4">
-      <Button label="Access Camera" @click="startCamera" />
-      <Button label="Capture Image" @click="captureImage" v-if="isCameraActive" />
-    </div>
+            <div class="mt-4">
+              <Button label="Access Camera" @click="startCamera" />
+              <Button label="Capture Image" @click="captureImage" v-if="isCameraActive" />
+            </div>
 
-    <div v-if="coordinates" class="mt-4">
-      <p>Latitude: {{ coordinates.latitude }}</p>
-      <p>Longitude: {{ coordinates.longitude }}</p>
-    </div>
+            <div v-if="coordinates" class="mt-4">
+              <p>Latitude: {{ coordinates.latitude }}</p>
+              <p>Longitude: {{ coordinates.longitude }}</p>
+            </div>
             <div class="flex p-4 justify-end bg-gray-50">
               <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
             </div>
@@ -100,9 +100,6 @@
         </StepPanel>
       </StepPanels>
     </Stepper>
-
-    <!-- Camera Access -->
-
 
     <Dialog v-model:visible="previewVisible" header="File Preview" :style="{ width: '50rem' }">
       <div v-for="file in files" :key="file.name" class="mb-4">
@@ -212,6 +209,7 @@ const startCamera = async () => {
     isCameraActive.value = true;
   } catch (error) {
     console.error("Error accessing camera:", error);
+    alert("Please allow camera access.");
   }
 };
 
@@ -234,6 +232,7 @@ const getLocation = () => {
       };
     }, (error) => {
       console.error("Error getting location:", error);
+      alert("Please allow location access.");
     });
   } else {
     alert("Geolocation is not supported by this browser.");
