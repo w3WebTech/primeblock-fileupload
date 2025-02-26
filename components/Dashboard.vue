@@ -14,7 +14,7 @@
               <div class="border-gray-200 rounded bg-gray-50 flex-auto flex justify-center items-center font-medium">
                 <div class="card flex justify-center py-10">
                   <div class="flex flex-col gap-2">
-                    <label for="username">Username</label>
+                    <!-- <label for="username">Username</label>
                     <InputText
                       id="username"
                       v-model="Username"
@@ -23,7 +23,7 @@
                     />
                     <Message v-if="usernameErrorMessage" severity="error" class="mt-2 text-xs">
                       {{ usernameErrorMessage }}
-                    </Message>
+                    </Message> -->
                        <!-- Location info -->
             <div v-if="coordinates" class="mt-4">
               <p>Latitude: {{ coordinates.latitude }}</p>
@@ -32,7 +32,7 @@
 
             <!-- Live Camera (Show only if camera is active and no image captured) -->
             <div v-if="isCameraActive && !capturedImage" class="mt-4">
-              <video ref="video" autoplay playsinline class="w-full h-auto"></video>
+              <video ref="video" autoplay playsinline class="w-full h-[200px]"></video>
 
               <div class="flex justify-center mt-2">
                 <Button label="Capture Image" @click="captureImage" />
@@ -41,7 +41,7 @@
 
             <!-- Captured Image and Retake Button (Show only if image is captured) -->
             <div v-if="capturedImage" class="mt-4">
-              <img :src="capturedImage" alt="Captured Image" class="w-full h-auto" />
+              <img :src="capturedImage" alt="Captured Image" class="w-full h-[200px]" />
               <div class="flex justify-center mt-2">
                 <Button label="Retake" @click="retakeCapture" />
               </div>
@@ -137,6 +137,12 @@ import Step from 'primevue/step';
 import StepList from 'primevue/steplist';
 import StepPanel from 'primevue/steppanel';
 import Message from 'primevue/message';
+
+// Accept clientName and clientCode as props
+const { clientName, clientCode } = defineProps({
+  clientName: String,
+  clientCode: String
+});
 
 const Username = ref(null);
 const address = ref(null);
@@ -247,8 +253,12 @@ const getLocation = () => {
     });
   }
 };
-
+console.log('Client Name:', clientName);  // Log clientName prop
+  console.log('Client Code:', clientCode); 
 onMounted(() => {
+  console.log('Client Name:', clientName);  // Log clientName prop
+  console.log('Client Code:', clientCode);  // Log clientCode prop
   getLocation();
 });
 </script>
+

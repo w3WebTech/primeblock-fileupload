@@ -188,7 +188,8 @@
       <div class="p-8 flex flex-col flex-auto">
         <div class="border-2 border-dashed rounded-border border-surface bg-[#ffffff] flex-auto p-5"
           :class="{ 'w-[calc(100%-5px)] ': isFixedSidebar, ' ml-20': !isFixedSidebar }">
-          <Dashboard />
+          <Dashboard :client-name="clientName.value" :client-code="clientCode.value" />
+
         </div>
       </div>
     </div>
@@ -197,12 +198,17 @@
 
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch,onMounted } from 'vue';
 import Checkbox from 'primevue/checkbox';
 import 'primeicons/primeicons.css';
 const activeTab2 = ref(0);
 const isSidebarOpen = ref(false);
 const isFixedSidebar = ref(false);
+
+import { useRoute } from 'vue-router'; // Add this import
+const clientName = ref('');
+const clientCode = ref('');
+
 
 const menuItems = [
   { icon: 'pi pi-home' },
@@ -254,15 +260,22 @@ watch(isFixedSidebar, (newValue) => {
 });
 
 onMounted(async () => {
+ 
+  const route = useRoute();  // Access the current route
+  // Get values from route params or set static values if not available
+  clientName.value = route.params.clientName || 'Static Client Name';
+  clientCode.value = route.params.clientCode || 'Static Client Code';
+console.log(clientName.value,"clientName.value")
+
   try {
-    const response = await fetch('http://157.49.106.12/new/v1.php', {
+    const response = await fetch('http://192.168.0.106/new/v1.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        clientName: 'Archu', 
-        clientCode:'GZ10219'
+        "clientName": 'Archu', 
+        "clientCode":'GZ10219'
       }),
     });
     
