@@ -40,12 +40,18 @@
 
             <!-- Live Camera -->
             <div v-if="isCameraActive" class="mt-4">
-              <video ref="video" autoplay playsinline class="w-full h-auto"></video>
-              <div class="flex justify-center mt-2">
-                <Button label="Capture Image" @click="captureImage" />
-              </div>
-              <img v-if="capturedImage" :src="capturedImage" alt="Captured Image" class="mt-4 w-full h-auto" />
-            </div>
+  <!-- Video Element for Live Feed -->
+  <video ref="video" autoplay playsinline class="w-full h-auto"></video>
+
+  <!-- Capture Button -->
+  <div class="flex justify-center mt-2">
+    <Button label="Capture Image" @click="captureImage" />
+  </div>
+
+  <!-- Display Captured Image -->
+  <img v-if="capturedImage" :src="capturedImage" alt="Captured Image" class="mt-4 w-full h-auto" />
+</div>
+
 
             <div class="flex p-4 justify-end bg-gray-50">
               <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
@@ -189,12 +195,13 @@ const closePreview = () => {
 };
 
 const startCamera = async () => {
+  debugger
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    isCameraActive.value = true;
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
     const video = document.querySelector('video');
     video.srcObject = stream;
-    isCameraActive.value = true;
-    showCamera.value = true;
+  
   } catch (error) {
     console.error("Error accessing camera:", error);
     alert("Error accessing camera.");
@@ -223,10 +230,14 @@ const captureImage = () => {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   const context = canvas.getContext('2d');
+  
+  // Draw the current video frame onto the canvas
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Convert the canvas content to a base64 image
   capturedImage.value = canvas.toDataURL('image/png');
-  stopCamera(); // Stop the camera after capture
 };
+
 
 const retakeCapture = () => {
   capturedImage.value = null;
