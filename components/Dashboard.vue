@@ -24,34 +24,39 @@
                     <Message v-if="usernameErrorMessage" severity="error" class="mt-2 text-xs">
                       {{ usernameErrorMessage }}
                     </Message>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-4 flex justify-center">
-              <Button label="Access Camera" @click="startCamera" />
-            </div>
-
+                       <!-- Location info -->
             <div v-if="coordinates" class="mt-4">
               <p>Latitude: {{ coordinates.latitude }}</p>
               <p>Longitude: {{ coordinates.longitude }}</p>
             </div>
 
-            <!-- Live Camera -->
-            <div v-if="isCameraActive" class="mt-4">
-  <!-- Video Element for Live Feed -->
-  <video ref="video" autoplay playsinline class="w-full h-auto"></video>
+            <!-- Live Camera (Show only if camera is active and no image captured) -->
+            <div v-if="isCameraActive && !capturedImage" class="mt-4">
+              <video ref="video" autoplay playsinline class="w-full h-auto"></video>
 
-  <!-- Capture Button -->
-  <div class="flex justify-center mt-2">
-    <Button label="Capture Image" @click="captureImage" />
-  </div>
+              <div class="flex justify-center mt-2">
+                <Button label="Capture Image" @click="captureImage" />
+              </div>
+            </div>
 
-  <!-- Display Captured Image -->
-  <img v-if="capturedImage" :src="capturedImage" alt="Captured Image" class="mt-4 w-full h-auto" />
-</div>
+            <!-- Captured Image and Retake Button (Show only if image is captured) -->
+            <div v-if="capturedImage" class="mt-4">
+              <img :src="capturedImage" alt="Captured Image" class="w-full h-auto" />
+              <div class="flex justify-center mt-2">
+                <Button label="Retake" @click="retakeCapture" />
+              </div>
+            </div>
 
+            <!-- Access Camera Button (Show only if camera is not active and no image captured) -->
+            <div v-if="!isCameraActive && !capturedImage" class="mt-4 flex justify-center">
+              <Button label="Access Camera" @click="startCamera" />
+            </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         
 
             <div class="flex p-4 justify-end bg-gray-50">
               <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
@@ -143,7 +148,6 @@ const coordinates = ref(null);
 const fileUploadRef = ref(null);
 const toast = useToast();
 const isCameraActive = ref(false);
-const showCamera = ref(false);
 const capturedImage = ref(null);
 
 const validateStep1 = (activateCallback) => {
@@ -195,24 +199,14 @@ const closePreview = () => {
 };
 
 const startCamera = async () => {
-  debugger
   try {
     isCameraActive.value = true;
     const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
     const video = document.querySelector('video');
     video.srcObject = stream;
-  
   } catch (error) {
     console.error("Error accessing camera:", error);
     alert("Error accessing camera.");
-  }
-};
-
-const toggleCamera = () => {
-  if (showCamera.value) {
-    stopCamera();
-  } else {
-    startCamera();
   }
 };
 
@@ -221,7 +215,6 @@ const stopCamera = () => {
   const stream = video.srcObject;
   const tracks = stream?.getTracks();
   tracks?.forEach(track => track.stop());
-  showCamera.value = false;
 };
 
 const captureImage = () => {
@@ -238,10 +231,9 @@ const captureImage = () => {
   capturedImage.value = canvas.toDataURL('image/png');
 };
 
-
 const retakeCapture = () => {
   capturedImage.value = null;
-  showCamera.value = false;
+  isCameraActive.value = false;
   startCamera(); // Restart the camera
 };
 
