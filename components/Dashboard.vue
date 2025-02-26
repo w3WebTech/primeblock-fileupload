@@ -206,6 +206,7 @@ const closePreview = () => {
 };
 
 const startCamera = async () => {
+  debugger
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     const video = document.querySelector('video');
@@ -213,7 +214,13 @@ const startCamera = async () => {
     isCameraActive.value = true;
   } catch (error) {
     console.error("Error accessing camera:", error);
-    alert("Please allow camera access.");
+    if (error.name === "NotAllowedError") {
+      alert("Camera access was denied. Please allow camera access in your browser settings.");
+    } else if (error.name === "NotFoundError") {
+      alert("No camera device found. Please connect a camera.");
+    } else {
+      alert("An error occurred while trying to access the camera. Please check your settings.");
+    }
   }
 };
 
