@@ -22,8 +22,9 @@
                   :class="{ 'bg-[#3B55C4]': activeTab2 === index }" @click="activeTab2 = index"
                   @mouseenter="changeActiveTab(index)">
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
-      
-                  <i :class="['text-xl', item.icon, 'text-[#FFFFFF]', { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]"></i>
+
+                  <i
+                    :class="['text-xl', item.icon, 'text-[#FFFFFF]', { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]"></i>
 
                 </a>
               </li>
@@ -39,30 +40,15 @@
             </a>
           </div>
         </div>
-        <div
-  id="app-sidebar-10"
-  class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface bg-[#3B55C4] px-1 py-6"
-  :class="{
-    // For when the sidebar is open or fixed, apply the full width and full opacity with sliding and fade-in effect
-    'w-[230px] opacity-100 transform translate-x-0': isSidebarOpen || isFixedSidebar,
-
-    // For when the sidebar is closed, apply zero width, full transparency, and sliding effect to the left
-    'w-0 opacity-0 transform -translate-x-full': !isSidebarOpen && !isFixedSidebar,
-
-    // Smooth transition for width, opacity, and transform with a slight delay
-    'transition-all duration-500 ease-in-out': isSidebarOpen || isFixedSidebar,
-
-    // Additional animation for a smooth fade-in/fade-out effect
-    'lg:block': isFixedSidebar || isSidebarOpen, // Show for large screens when sidebar is open
-    'lg:hidden': !isFixedSidebar && !isSidebarOpen // Hide for large screens when sidebar is closed
-  }"
-  @mouseenter="openSidebar"
-  @mouseleave="handleMouseLeave">
-  
-  <!-- Sidebar content goes here -->
-
-</div>
-
+        <div id="app-sidebar-10"
+          class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface bg-[#3B55C4] px-1 py-6"
+          :class="{
+            'w-[230px] opacity-100 fade-in': isSidebarOpen || isFixedSidebar, // When open, full width and fully visible
+            'w-0 opacity-0 fade-out delay-150': !isSidebarOpen && !isFixedSidebar, // When closed, zero width and fully transparent
+            'transition-all duration-3000 delay-150 ease-in-out': isSidebarOpen || isFixedSidebar, // 1-second smooth transition for all properties
+            'lg:block': isFixedSidebar || isSidebarOpen, // Show for large screens when sidebar is open
+            'lg:hidden': !isFixedSidebar && !isSidebarOpen // Hide for large screens when sidebar is closed
+          }" @mouseenter="openSidebar" @mouseleave="handleMouseLeave">
 
 
 
@@ -86,17 +72,20 @@
                  rounded-lg  hover:bg-[#2F449D] hover:text-gray-300
               
                 transition-colors duration-200">
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+               <span> 
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                       stroke="currentColor" class="h-5 w-5 font-bold
       ">
                       <path stroke-linecap="round" stroke-linejoin="round"
                         d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-                    </svg>
+                    </svg> -->
+                    <img src="@/public/hover.gif
+                    " height="30" width="30">
+     
 
                   </span>
                   <span class="px-2">
-                 Dashboard 1
+                    Dashboard 1
                   </span>
 
                 </div>
@@ -107,14 +96,15 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2
                     " stroke="currentColor" class="h-5 w-5
                     ">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-</svg>
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+                    </svg>
 
 
 
                   </span>
                   <span class="px-2">
-             Task
+                    Task
                   </span>
 
                 </div>
@@ -133,15 +123,16 @@
                   </span>
                 </div>
 
-<div class="flex py-3 px-4
+                <div class="flex py-3 px-4
                 rounded-lg  hover:bg-[#2F449D] hover:text-gray-300
                  transition-colors duration-200">
                   <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2
                     " stroke="currentColor" class="h-5 w-5
                     ">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
-</svg>
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+                    </svg>
                   </span>
                   <span class="px-2">
                     Files
@@ -154,8 +145,8 @@
 
               <div class=" flex justify-center text-xs  my-10
               ">
-                
- 
+
+
               </div>
             </div>
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 2 }">
@@ -164,8 +155,8 @@
 
               <div class=" flex justify-center text-xs  my-10
               ">
-              
-  
+
+
               </div>
             </div>
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 3 }">
@@ -173,7 +164,7 @@
 
               <div class=" flex justify-center text-xs  my-10
               ">
-      
+
               </div>
             </div>
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 4 }">
@@ -181,8 +172,8 @@
 
               <div class=" flex justify-center text-xs  my-10
               ">
-                
-       
+
+
               </div>
             </div>
           </div>
@@ -197,7 +188,7 @@
       <div class="p-8 flex flex-col flex-auto">
         <div class="border-2 border-dashed rounded-border border-surface bg-[#ffffff] flex-auto p-5"
           :class="{ 'w-[calc(100%-5px)] ': isFixedSidebar, ' ml-20': !isFixedSidebar }">
-          Test
+          <Dashboard />
         </div>
       </div>
     </div>
@@ -232,6 +223,7 @@ const toggleSidebar = () => {
 };
 
 
+
 const openSidebar = () => {
   if (!isFixedSidebar.value) {
     isSidebarOpen.value = true;
@@ -260,6 +252,33 @@ watch(isFixedSidebar, (newValue) => {
     isFixedSidebar.value = false;
   }
 });
+
+onMounted(async () => {
+  try {
+    const response = await fetch('http://157.49.106.12/new/v1.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        clientName: 'Archu', 
+        clientCode:'GZ10219'
+      }),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    const data = await response.json();
+  
+    console.log(data);  // Optional: log the response to the console
+  } catch (error) {
+    console.error('Error during fetch:', error);
+  }
+});
+
+
 </script>
 
 <style>
