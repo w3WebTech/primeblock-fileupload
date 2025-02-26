@@ -28,9 +28,8 @@
                 </div>
               </div>
             </div>
-            <div class="mt-4">
+            <div class="mt-4 flex justify-center">
               <Button label="Access Camera" @click="startCamera" />
-              <Button label="Capture Image" @click="captureImage" v-if="isCameraActive" />
             </div>
 
             <div v-if="coordinates" class="mt-4">
@@ -122,6 +121,9 @@
     <!-- Video Element for Camera -->
     <div v-if="isCameraActive" class="mt-4">
       <video ref="video" autoplay playsinline class="w-full h-auto"></video>
+      <div class="flex justify-center mt-2">
+        <Button label="Capture Image" @click="captureImage" />
+      </div>
       <img v-if="capturedImage" :src="capturedImage" alt="Captured Image" class="mt-4 w-full h-auto" />
     </div>
   </div>
