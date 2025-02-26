@@ -28,6 +28,7 @@
                 </div>
               </div>
             </div>
+
             <div class="mt-4 flex justify-center">
               <Button label="Access Camera" @click="startCamera" />
             </div>
@@ -36,6 +37,16 @@
               <p>Latitude: {{ coordinates.latitude }}</p>
               <p>Longitude: {{ coordinates.longitude }}</p>
             </div>
+
+            <!-- Live Camera -->
+            <div v-if="isCameraActive" class="mt-4">
+              <video ref="video" autoplay playsinline class="w-full h-auto"></video>
+              <div class="flex justify-center mt-2">
+                <Button label="Capture Image" @click="captureImage" />
+              </div>
+              <img v-if="capturedImage" :src="capturedImage" alt="Captured Image" class="mt-4 w-full h-auto" />
+            </div>
+
             <div class="flex p-4 justify-end bg-gray-50">
               <Button label="Next" icon="pi pi-arrow-right" iconPos="right" @click="validateStep1(activateCallback)" />
             </div>
@@ -117,15 +128,6 @@
         <Button label="Close" @click="closePreview" />
       </div>
     </Dialog>
-
-    <!-- Video Element for Camera -->
-    <div v-if="isCameraActive" class="mt-4">
-      <video ref="video" autoplay playsinline class="w-full h-auto"></video>
-      <div class="flex justify-center mt-2">
-        <Button label="Capture Image" @click="captureImage" />
-      </div>
-      <img v-if="capturedImage" :src="capturedImage" alt="Captured Image" class="mt-4 w-full h-auto" />
-    </div>
   </div>
 </template>
 
