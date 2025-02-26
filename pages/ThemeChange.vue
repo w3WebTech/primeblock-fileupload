@@ -263,12 +263,16 @@ onMounted(async () => {
  
   const route = useRoute();  // Access the current route
   // Get values from route params or set static values if not available
-  clientName.value = route.params.clientName || 'Static Client Name';
-  clientCode.value = route.params.clientCode || 'Static Client Code';
+ clientName.value = route.query.clientName
+        ? route.query.clientName
+        : "";
+  clientCode.value =route.query.clientCode
+        ? route.query.clientCode
+        : "";
 console.log(clientName.value,"clientName.value")
 
   try {
-    const response = await fetch('http://192.168.0.106/new/v1.php', {
+    const response = await fetch('http://192.168.0.106/new/v2.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
