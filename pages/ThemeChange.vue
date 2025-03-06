@@ -70,7 +70,7 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems2" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 hover:font-bold hover:text-md"
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 "
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <span class="group">
