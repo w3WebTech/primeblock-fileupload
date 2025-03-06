@@ -70,14 +70,15 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems2" :key="index"
-                  class="flex py-3 px-4 rounded-lg transition-colors duration-200 hover:scale-105 hover:bg-[#2F449D] hover:text-white"
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 hover:font-bold hover:text-md"
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <span class="group">
                     <!-- Icon animation on hover -->
                     <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
                       :height="item.icon.height" :viewBox="item.icon.viewBox"
-                      class="transition-transform duration-300 group-hover:animate-shake group-hover:scale-125">
+                      class="transition-transform duration-300 
+                       ">
                       <g v-for="(path, idx) in item.icon.paths" :key="idx" :fill="path.fill || 'none'"
                         :stroke="path.stroke || 'currentColor'" :stroke-linecap="path.strokeLinecap || 'round'"
                         :stroke-linejoin="path.strokeLinejoin || 'round'" :stroke-width="path.strokeWidth || 2">
