@@ -23,8 +23,9 @@
                   @mouseenter="changeActiveTab(index)">
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
 
-                  <i
-                    :class="['text-xl', item.icon, 'text-[#FFFFFF]', { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]"></i>
+                  <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
+
+                    , { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]" style="font-size: 1.5rem"></i>
 
                 </a>
               </li>
@@ -63,82 +64,39 @@
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 0 }">
               Dashboard
 
-              <!-- Animated Menu -->
-              <div v-show="activeTab2 === 0" class="flex-col
-       justify-center text-sm
-        my-10 transition-all duration-500 ease-in-out opacity-0"
-                :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-x-0': activeTab2 === 0, 'translate-x-10': activeTab2 !== 0 }">
-                <div class="flex py-3 px-4
-                 rounded-lg  hover:bg-[#2F449D] hover:text-gray-300
-              
-                transition-colors duration-200">
-               <span> 
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                      stroke="currentColor" class="h-5 w-5 font-bold
-      ">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-                    </svg> -->
-                    <img src="@/public/hover.gif
-                    " height="30" width="30">
-     
+              <div v-show="activeTab2 === 0"
+                class="flex-col justify-center text-sm my-10 transition-all duration-500 ease-in-out opacity-0"
+                :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
+                style="animation: slideDown 0.5s ease-out forwards;">
 
-                  </span>
-                  <span class="px-2">
-                    Dashboard 1
-                  </span>
+                <div v-for="(item, index) in menuItems2" :key="index"
+                  class="flex py-3 px-4 rounded-lg transition-colors duration-200 hover:scale-105 hover:bg-[#2F449D] hover:text-white"
+                  :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
-                </div>
-                <div class="flex py-3 px-4
-                 rounded-lg  hover:bg-[#2F449D] hover:text-gray-300
-                transition-colors duration-200">
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2
-                    " stroke="currentColor" class="h-5 w-5
-                    ">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-                    </svg>
-
-
-
-                  </span>
-                  <span class="px-2">
-                    Task
-                  </span>
-
-                </div>
-                <div class="flex py-3 px-4
-                rounded-lg  hover:bg-[#2F449D] hover:text-gray-300
-                 transition-colors duration-200">
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                      stroke="currentColor" class="h-5 w-5">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+                  <span class="group">
+                    <!-- Icon animation on hover -->
+                    <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
+                      :height="item.icon.height" :viewBox="item.icon.viewBox"
+                      class="transition-transform duration-300 group-hover:animate-shake group-hover:scale-125">
+                      <g v-for="(path, idx) in item.icon.paths" :key="idx" :fill="path.fill || 'none'"
+                        :stroke="path.stroke || 'currentColor'" :stroke-linecap="path.strokeLinecap || 'round'"
+                        :stroke-linejoin="path.strokeLinejoin || 'round'" :stroke-width="path.strokeWidth || 2">
+                        <path :d="path.d" />
+                      </g>
                     </svg>
                   </span>
+
                   <span class="px-2">
-                    New
+                    {{ item.name }}
                   </span>
                 </div>
 
-                <div class="flex py-3 px-4
-                rounded-lg  hover:bg-[#2F449D] hover:text-gray-300
-                 transition-colors duration-200">
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2
-                    " stroke="currentColor" class="h-5 w-5
-                    ">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
-                    </svg>
-                  </span>
-                  <span class="px-2">
-                    Files
-                  </span>
-                </div>
+
+
               </div>
+
+
+
             </div>
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 1 }">
               Bookmarks
@@ -198,7 +156,7 @@
 
 
 <script setup>
-import { ref, watch,onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import Checkbox from 'primevue/checkbox';
 import 'primeicons/primeicons.css';
 const activeTab2 = ref(0);
@@ -217,6 +175,56 @@ const menuItems = [
   { icon: 'pi pi-comments' },
   { icon: 'pi pi-calendar' },
 ];
+const menuItems2 = [
+  {
+    name: 'Dashboard 1',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M3 19.5v-15.5c0 -0.55 0.45 -1 1 -1h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-14.5Z" },
+        { d: "M8 7h8" },
+        { d: "M8 10h8" },
+        { d: "M8 13h4" },
+      ]
+    }
+  },
+  {
+    name: 'Task',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" }
+      ]
+    }
+  },
+  {
+    name: 'New',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" }
+      ]
+    }
+  },
+  {
+    name: 'Files',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" }
+      ]
+    }
+  }
+]
+  ;
 
 
 const toggleSidebar = () => {
@@ -260,39 +268,18 @@ watch(isFixedSidebar, (newValue) => {
 });
 
 onMounted(async () => {
- 
+
   const route = useRoute();  // Access the current route
   // Get values from route params or set static values if not available
- clientName.value = route.query.clientName
-        ? route.query.clientName
-        : "";
-  clientCode.value =route.query.clientCode
-        ? route.query.clientCode
-        : "";
-console.log(clientName.value,"clientName.value")
+  clientName.value = route.query.clientName
+    ? route.query.clientName
+    : "";
+  clientCode.value = route.query.clientCode
+    ? route.query.clientCode
+    : "";
+  console.log(clientName.value, "clientName.value")
 
-  try {
-    const response = await fetch('http://192.168.0.106/new/v2.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "clientName": 'Archu', 
-        "clientCode":'GZ10219'
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    
-    const data = await response.json();
-  
-    console.log(data);  // Optional: log the response to the console
-  } catch (error) {
-    console.error('Error during fetch:', error);
-  }
+
 });
 
 
@@ -365,5 +352,47 @@ console.log(clientName.value,"clientName.value")
 /* Or apply it specifically to your component */
 #app-sidebar-10 {
   font-family: 'Inter', sans-serif;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes expandSize {
+  from {
+    transform: scale(0.9);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 </style>

@@ -157,6 +157,8 @@ const isCameraActive = ref(false);
 const capturedImage = ref(null);
 
 const validateStep1 = (activateCallback) => {
+  debugger
+  postapi()
   if (!Username.value) {
     usernameErrorMessage.value = 'Username is required.';
   } else {
@@ -253,12 +255,46 @@ const getLocation = () => {
     });
   }
 };
-console.log('Client Name:', clientName);  // Log clientName prop
-  console.log('Client Code:', clientCode); 
+
 onMounted(() => {
-  console.log('Client Name:', clientName);  // Log clientName prop
-  console.log('Client Code:', clientCode);  // Log clientCode prop
+
   getLocation();
 });
+const postapi = async () => {
+
+debugger
+
+
+
+  // Prepare the data to be sent
+  const postData = {
+    lat: coordinates.value?.latitude || null, // Latitude
+    lon: coordinates.value?.longitude || null, // Longitude
+    name: "name", // Name
+    clientCode: "ClientCode",
+    image: capturedImage.value || null, // Image (base64 string)
+    date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
+    time: new Date().toLocaleTimeString(), // Current time
+  };
+
+  try {
+    const response = await fetch('http://192.168.0.106/new/client.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData), // Send the prepared data
+    });
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    
+    const data = await response.json();
+    console.log(data);  // Optional: log the response to the console
+  } catch (error) {
+    console.error('Error during fetch:', error);
+  }
+};
 </script>
 
