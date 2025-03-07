@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="rounded-border flex-auto">
-            <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 0 }">
+            <div class="px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 0 }">
               Dashboard
 
               <div v-show="activeTab2 === 0"
@@ -101,7 +101,7 @@
 
 
             </div>
-            <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 1 }">
+            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 1 }">
               Bookmarks
 
               <div v-show="activeTab2 === 1"
@@ -138,7 +138,7 @@
               </div>
 
             </div>
-            <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 2 }">
+            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 2 }">
               Team
 
 
@@ -176,7 +176,7 @@
 
               </div>
             </div>
-            <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 3 }">
+            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 3 }">
               Messages
 
               <div class=" flex justify-center text-xs  my-10
@@ -184,7 +184,7 @@
 
               </div>
             </div>
-            <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 4 }">
+            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 4 }">
               Calendar
 
               <div class=" flex justify-center text-xs  my-10
