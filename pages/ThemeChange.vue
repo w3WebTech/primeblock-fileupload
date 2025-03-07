@@ -18,14 +18,15 @@
           <div class="overflow-y-auto mt-4">
             <ul class="list-none py-4 pl-2 pr-0 m-0">
               <li class="mb-2" v-for="(item, index) in menuItems" :key="index">
-                <a class="rounded-l-full flex items-center cursor-pointer py-4 pl-0 pr-2 justify-center hover:bg-[#3B55C4] text-[#FFFFFF] duration-150 transition-colors"
+                <a class="rounded-l-full flex items-center cursor-pointer py-4  px-4 justify-center hover:bg-[#3B55C4] text-[#FFFFFF] duration-150 transition-colors"
                   :class="{ 'bg-[#3B55C4]': activeTab2 === index }" @click="activeTab2 = index"
                   @mouseenter="changeActiveTab(index)">
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
 
-                  <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
+                  <!-- <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
 
-                    , { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]" style="font-size: 1.5rem"></i>
+                    , { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]" style="font-size: 1.5rem"></i> -->
+                    <component :is="item.component" class="text-xl text-[#FFFFFF]" :class="{ 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }" style="font-size: 1.5rem"></component>
 
                 </a>
               </li>
@@ -91,6 +92,7 @@
                     {{ item.name }}
                   </span>
                 </div>
+                
 
 
 
@@ -102,18 +104,74 @@
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 1 }">
               Bookmarks
 
-              <div class=" flex justify-center text-xs  my-10
-              ">
+              <div v-show="activeTab2 === 1"
+                class="flex-col justify-center text-sm my-10 transition-all duration-500 ease-in-out opacity-0"
+                :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
+                style="animation: slideDown 0.5s ease-out forwards;">
+
+                <div v-for="(item, index) in menuItems3" :key="index"
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 "
+                  :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
+
+                  <span class="group">
+                    <!-- Icon animation on hover -->
+                    <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
+                      :height="item.icon.height" :viewBox="item.icon.viewBox"
+                      class="transition-transform duration-300 
+                       ">
+                      <g v-for="(path, idx) in item.icon.paths" :key="idx" :fill="path.fill || 'none'"
+                        :stroke="path.stroke || 'currentColor'" :stroke-linecap="path.strokeLinecap || 'round'"
+                        :stroke-linejoin="path.strokeLinejoin || 'round'" :stroke-width="path.strokeWidth || 2">
+                        <path :d="path.d" />
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span class="px-2">
+                    {{ item.name }}
+                  </span>
+                </div>
+                
+
 
 
               </div>
+
             </div>
             <div class="p-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 2 }">
               Team
 
 
-              <div class=" flex justify-center text-xs  my-10
-              ">
+           
+              <div v-show="activeTab2 === 2"
+                class="flex-col justify-center text-sm my-10 transition-all duration-500 ease-in-out opacity-0"
+                :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
+                style="animation: slideDown 0.5s ease-out forwards;">
+
+                <div v-for="(item, index) in menuItems4" :key="index"
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 "
+                  :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
+
+                  <span class="group">
+                    <!-- Icon animation on hover -->
+                    <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
+                      :height="item.icon.height" :viewBox="item.icon.viewBox"
+                      class="transition-transform duration-300 
+                       ">
+                      <g v-for="(path, idx) in item.icon.paths" :key="idx" :fill="path.fill || 'none'"
+                        :stroke="path.stroke || 'currentColor'" :stroke-linecap="path.strokeLinecap || 'round'"
+                        :stroke-linejoin="path.strokeLinejoin || 'round'" :stroke-width="path.strokeWidth || 2">
+                        <path :d="path.d" />
+                      </g>
+                    </svg>
+                  </span>
+
+                  <span class="px-2">
+                    {{ item.name }}
+                  </span>
+                </div>
+                
+
 
 
               </div>
@@ -160,6 +218,11 @@
 import { ref, watch, onMounted } from 'vue';
 import Checkbox from 'primevue/checkbox';
 import 'primeicons/primeicons.css';
+import ChatIcon from './components/ChatIcon.vue';
+import BookmarkIcon from './components/BookmarkIcon.vue';
+import CalenderIcon from './components/CalenderIcon.vue';
+import UserIcon from './components/UserIcon.vue';
+import CommentsIcon from './components/CommentsIcon.vue';
 const activeTab2 = ref(0);
 const isSidebarOpen = ref(false);
 const isFixedSidebar = ref(false);
@@ -170,11 +233,12 @@ const clientCode = ref('');
 
 
 const menuItems = [
-  { icon: 'pi pi-home' },
-  { icon: 'pi pi-bookmark' },
-  { icon: 'pi pi-users' },
-  { icon: 'pi pi-comments' },
-  { icon: 'pi pi-calendar' },
+  { component: ChatIcon }, // Chat icon component
+  { component: BookmarkIcon }, 
+  { component: UserIcon },
+  { component: CommentsIcon },
+  { component: CalenderIcon },  // Bookmark icon component
+  // Add other icons similarly
 ];
 const menuItems2 = [
   {
@@ -226,6 +290,109 @@ const menuItems2 = [
   }
 ]
   ;
+  const menuItems3 = [
+  {
+    name: 'Home',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M12 3L2 12h3v7h6v-4h6v4h3z" }
+      ]
+    }
+  },
+  {
+    name: 'Messages',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M4 4h16v12H4z" },
+        { d: "M4 16l4-4h8l4 4" }
+      ]
+    }
+  },
+  {
+    name: 'Notifications',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M16 16v1c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2v-1" },
+        { d: "M8 11V7c0-3.87 3.13-7 7-7s7 3.13 7 7v4" }
+      ]
+    }
+  },
+  {
+    name: 'Settings',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M19 12h-4.6a5.42 5.42 0 0 0-1.3-2.6l3.1-3.1a1.99 1.99 0 1 0-2.8-2.8l-3.1 3.1a5.42 5.42 0 0 0-2.6-1.3V5a1.99 1.99 0 1 0-4 0v4.6a5.42 5.42 0 0 0-2.6 1.3l-3.1-3.1a1.99 1.99 0 1 0-2.8 2.8l3.1 3.1a5.42 5.42 0 0 0-1.3 2.6V19a1.99 1.99 0 1 0 4 0v-4.6a5.42 5.42 0 0 0 2.6-1.3l3.1 3.1a1.99 1.99 0 1 0 2.8-2.8l-3.1-3.1a5.42 5.42 0 0 0 1.3-2.6H19a1.99 1.99 0 1 0 0-4z" }
+      ]
+    }
+  }
+];
+
+const menuItems4 = [
+  {
+    name: 'Dashboard',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M3 3h18v18H3z" },
+        { d: "M3 9h18" },
+        { d: "M9 3v18" }
+      ]
+    }
+  },
+  {
+    name: 'Users',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4Z" },
+        { d: "M8 14c-1.11 0-2 .89-2 2s.89 2 2 2h8c1.11 0 2-.89 2-2s-.89-2-2-2H8Z" }
+      ]
+    }
+  },
+  {
+    name: 'Calendar',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M3 5h18V3h-2V1h-2v2h-8V1h-2v2H3z" },
+        { d: "M3 7h18v14H3z" },
+        { d: "M3 7v14h18V7" }
+      ]
+    }
+  },
+  {
+    name: 'Reports',
+    icon: {
+      width: 24,
+      height: 24,
+      viewBox: '0 0 24 24',
+      paths: [
+        { d: "M5 3h14v18H5z" },
+        { d: "M5 7h14" },
+        { d: "M5 11h14" },
+        { d: "M5 15h14" }
+      ]
+    }
+  }
+];
 
 
 const toggleSidebar = () => {
@@ -287,6 +454,10 @@ onMounted(async () => {
 </script>
 
 <style>
+body {
+  font-family: 'Inter', sans-serif;
+}
+
 .hidden {
   transform: translateX(-100%);
 }
