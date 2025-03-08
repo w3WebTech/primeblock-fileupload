@@ -20,7 +20,7 @@
               <li class="mb-2" v-for="(item, index) in menuItems" :key="index">
                 <a class="rounded-l-full flex items-center cursor-pointer py-4  px-4 justify-center hover:bg-[#3B55C4] text-[#FFFFFF] duration-150 transition-colors"
                   :class="{ 'bg-[#3B55C4]': activeTab2 === index }" @click="activeTab2 = index"
-                  @mouseenter="changeActiveTab(index)" 
+                  @mouseenter="changeActiveTab(index)"       v-tooltip="{ value: item.name, autoHide: false }"
                   >
                                   
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
@@ -68,7 +68,7 @@
             </div>
           </div>
           <div class="rounded-border flex-auto">
-            <div class="px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 0 }">
+            <div class="px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 0 }">
               Dashboard
               <div v-show="activeTab2 === 0"
     class="flex-col justify-center text-sm my-5 transition-all duration-500 ease-in-out opacity-0"
@@ -76,7 +76,7 @@
     style="animation: slideDown 0.5s ease-out forwards;">
 
     <div v-for="(item, index) in menuItems2" :key="index"
-      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 hover:text-gray-700 text-[#767b82] font-semibold"
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 hover:text-gray-700 text-[#64676B] custom font-sans "
       :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
       <span class="group">
@@ -94,7 +94,7 @@
 
 
             </div>
-            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 1 }">
+            <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 1 }">
               Bookmarks
 
               <div v-show="activeTab2 === 1"
@@ -131,7 +131,7 @@
               </div>
 
             </div>
-            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 2 }">
+            <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 2 }">
               Team
 
 
@@ -170,7 +170,7 @@
 
               </div>
             </div>
-            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 3 }">
+            <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 3 }">
               Messages
 
               <div class=" flex justify-center text-xs  my-10
@@ -178,7 +178,7 @@
 
               </div>
             </div>
-            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 4 }">
+            <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 4 }">
               Calendar
 
               <div class=" flex justify-center text-xs  my-10
@@ -217,6 +217,11 @@ import BookmarkIcon from './components/BookmarkIcon.vue';
 import CalenderIcon from './components/CalenderIcon.vue';
 import UserIcon from './components/UserIcon.vue';
 import CommentsIcon from './components/CommentsIcon.vue';
+
+import Tooltip from 'primevue/tooltip';
+
+
+
 const activeTab2 = ref(0);
 const isSidebarOpen = ref(false);
 const isFixedSidebar = ref(false);
@@ -227,11 +232,11 @@ const clientCode = ref('');
 
 
 const menuItems = [
-  { component: ChatIcon }, // Chat icon component
-  { component: BookmarkIcon }, 
-  { component: UserIcon },
-  { component: CommentsIcon },
-  { component: CalenderIcon },  // Bookmark icon component
+  { component: ChatIcon,name:'Dashboard' }, // Chat icon component
+  { component: BookmarkIcon,name:"Bookmarks" }, 
+  { component: UserIcon ,name:"Team"},
+  { component: CommentsIcon,name:"Messages" },
+  { component: CalenderIcon,name:"Calender" },  // Bookmark icon component
   // Add other icons similarly
 ];
 const menuItems2 = [
@@ -528,5 +533,9 @@ onMounted(async () => {
   to {
     transform: scale(1);
   }
+}
+.custom{
+  font-weight: 550;
+  font-family: 'Inter',sans-serif;
 }
 </style>
