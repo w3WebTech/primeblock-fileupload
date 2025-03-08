@@ -20,7 +20,9 @@
               <li class="mb-2" v-for="(item, index) in menuItems" :key="index">
                 <a class="rounded-l-full flex items-center cursor-pointer py-4  px-4 justify-center hover:bg-[#3B55C4] text-[#FFFFFF] duration-150 transition-colors"
                   :class="{ 'bg-[#3B55C4]': activeTab2 === index }" @click="activeTab2 = index"
-                  @mouseenter="changeActiveTab(index)">
+
+                  >
+                                    <!-- @mouseenter="changeActiveTab(index)" -->
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
 
                   <!-- <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
@@ -42,15 +44,19 @@
             </a>
           </div>
         </div>
-        <div id="app-sidebar-10"
-          class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface bg-[#3B55C4] px-1 py-6"
-          :class="{
-            'w-[230px] opacity-100 fade-in': isSidebarOpen || isFixedSidebar, // When open, full width and fully visible
-            'w-0 opacity-0 fade-out delay-150': !isSidebarOpen && !isFixedSidebar, // When closed, zero width and fully transparent
-            'transition-all duration-3000 delay-150 ease-in-out': isSidebarOpen || isFixedSidebar, // 1-second smooth transition for all properties
-            'lg:block': isFixedSidebar || isSidebarOpen, // Show for large screens when sidebar is open
-            'lg:hidden': !isFixedSidebar && !isSidebarOpen // Hide for large screens when sidebar is closed
-          }" @mouseenter="openSidebar" @mouseleave="handleMouseLeave">
+        <div
+    id="app-sidebar-10"
+    class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface bg-[#fff] px-1 py-6"
+    :class="{
+      'w-[230px] opacity-100 fade-in': isSidebarOpen || isFixedSidebar, // When open, full width and fully visible
+      'w-0 opacity-0 fade-out delay-150': !isSidebarOpen && !isFixedSidebar, // When closed, zero width and fully transparent
+      'transition-all duration-500 ease-in-out': isSidebarOpen || isFixedSidebar, // 0.5-second smooth transition for all properties
+      'lg:block': isFixedSidebar || isSidebarOpen, // Show for large screens when sidebar is open
+      'lg:hidden': !isFixedSidebar && !isSidebarOpen // Hide for large screens when sidebar is closed
+    }"
+    @mouseenter="openSidebar" 
+    @mouseleave="handleMouseLeave"
+  >
 
 
 
@@ -62,7 +68,7 @@
             </div>
           </div>
           <div class="rounded-border flex-auto">
-            <div class="px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 0 }">
+            <div class="px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 0 }">
               Dashboard
 
               <div v-show="activeTab2 === 0"
@@ -71,7 +77,7 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems2" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 "
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <span class="group">
@@ -101,7 +107,7 @@
 
 
             </div>
-            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 1 }">
+            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 1 }">
               Bookmarks
 
               <div v-show="activeTab2 === 1"
@@ -110,7 +116,7 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems3" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 "
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <span class="group">
@@ -138,7 +144,7 @@
               </div>
 
             </div>
-            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 2 }">
+            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 2 }">
               Team
 
 
@@ -149,7 +155,7 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems4" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-white text-gray-300 "
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <span class="group">
@@ -176,7 +182,7 @@
 
               </div>
             </div>
-            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 3 }">
+            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 3 }">
               Messages
 
               <div class=" flex justify-center text-xs  my-10
@@ -184,7 +190,7 @@
 
               </div>
             </div>
-            <div class=" px-4 font-medium text-2xl text-[#FFFFFF]" :class="{ hidden: activeTab2 !== 4 }">
+            <div class=" px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 4 }">
               Calendar
 
               <div class=" flex justify-center text-xs  my-10
