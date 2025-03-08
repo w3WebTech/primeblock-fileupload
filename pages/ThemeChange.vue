@@ -20,9 +20,9 @@
               <li class="mb-2" v-for="(item, index) in menuItems" :key="index">
                 <a class="rounded-l-full flex items-center cursor-pointer py-4  px-4 justify-center hover:bg-[#3B55C4] text-[#FFFFFF] duration-150 transition-colors"
                   :class="{ 'bg-[#3B55C4]': activeTab2 === index }" @click="activeTab2 = index"
-
+                  @mouseenter="changeActiveTab(index)" 
                   >
-                                    <!-- @mouseenter="changeActiveTab(index)" -->
+                                  
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
 
                   <!-- <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
@@ -460,9 +460,11 @@ onMounted(async () => {
 </script>
 
 <style>
-body {
-  font-family: 'Inter', sans-serif;
+
+* {
+  font-family: 'Inter', sans-serif; /* Add your custom font here */
 }
+
 
 .hidden {
   transform: translateX(-100%);
