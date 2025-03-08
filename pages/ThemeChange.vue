@@ -76,7 +76,7 @@
     style="animation: slideDown 0.5s ease-out forwards;">
 
     <div v-for="(item, index) in menuItems2" :key="index"
-      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 hover:text-gray-700 text-[#64676B] custom font-sans "
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 hover:text-gray-700 text-[#4b4d59] custom font-sans "
       :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
       <span class="group">
@@ -535,7 +535,7 @@ onMounted(async () => {
   }
 }
 .custom{
-  font-weight: 550;
+  font-weight: 500;
   font-family: 'Inter',sans-serif;
 }
 </style>
