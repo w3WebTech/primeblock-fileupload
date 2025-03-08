@@ -70,39 +70,26 @@
           <div class="rounded-border flex-auto">
             <div class="px-4 font-medium text-2xl text-black" :class="{ hidden: activeTab2 !== 0 }">
               Dashboard
-
               <div v-show="activeTab2 === 0"
-                class="flex-col justify-center text-sm my-10 transition-all duration-500 ease-in-out opacity-0"
-                :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
-                style="animation: slideDown 0.5s ease-out forwards;">
+    class="flex-col justify-center text-sm my-5 transition-all duration-500 ease-in-out opacity-0"
+    :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
+    style="animation: slideDown 0.5s ease-out forwards;">
 
-                <div v-for="(item, index) in menuItems2" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
-                  :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
+    <div v-for="(item, index) in menuItems2" :key="index"
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 hover:text-gray-700 text-[#767b82] font-semibold"
+      :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
-                  <span class="group">
-                    <!-- Icon animation on hover -->
-                    <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
-                      :height="item.icon.height" :viewBox="item.icon.viewBox"
-                      class="transition-transform duration-300 
-                       ">
-                      <g v-for="(path, idx) in item.icon.paths" :key="idx" :fill="path.fill || 'none'"
-                        :stroke="path.stroke || 'currentColor'" :stroke-linecap="path.strokeLinecap || 'round'"
-                        :stroke-linejoin="path.strokeLinejoin || 'round'" :stroke-width="path.strokeWidth || 2">
-                        <path :d="path.d" />
-                      </g>
-                    </svg>
-                  </span>
+      <span class="group">
+        <!-- Icon rendering -->
+        <div v-html="item.icon"></div>
+      </span>
 
-                  <span class="px-2">
-                    {{ item.name }}
-                  </span>
-                </div>
-                
-
-
-
-              </div>
+      <!-- Menu Item Name -->
+      <span class="px-2">
+        {{ item.name }}
+      </span>
+    </div>
+  </div>
 
 
 
@@ -158,8 +145,8 @@
                   class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
-                  <span class="group">
-                    <!-- Icon animation on hover -->
+                  <!-- <span class="group">
+                   
                     <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
                       :height="item.icon.height" :viewBox="item.icon.viewBox"
                       class="transition-transform duration-300 
@@ -170,7 +157,8 @@
                         <path :d="path.d" />
                       </g>
                     </svg>
-                  </span>
+                  </span> -->
+                  <span class="inline-flex items-center   flex-grow-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><g fill="currentColor" clip-path="url(#graph_svg__clip0_4314_12611)"><path d="M2.174 19.153c-.697-.017-1.225-.437-1.282-1.132a22 22 0 0 1-.059-1.771c0-.784.025-1.356.06-1.772.056-.695.584-1.114 1.281-1.132.305-.008.687-.013 1.16-.013s.853.005 1.158.013c.697.018 1.225.437 1.282 1.132.034.416.06.989.06 1.772s-.026 1.355-.06 1.771c-.057.695-.585 1.115-1.282 1.132-.305.008-.686.013-1.159.013-.472 0-.854-.005-1.159-.013M15.704 19.15c-.812-.033-1.381-.604-1.434-1.415-.054-.84-.104-2.207-.104-4.402 0-2.194.05-3.56.104-4.402.053-.81.622-1.382 1.434-1.414q.4-.016.962-.017.563.001.963.017c.812.032 1.381.603 1.434 1.414.055.842.104 2.208.104 4.402s-.05 3.561-.104 4.402c-.053.811-.622 1.382-1.434 1.414q-.4.017-.963.018-.561 0-.962-.018M8.98 19.152c-.778-.023-1.345-.534-1.4-1.31A41 41 0 0 1 7.5 15c0-1.328.035-2.232.08-2.842.055-.777.622-1.287 1.4-1.31a33.672 33.672 0 0 1 2.039 0c.779.023 1.346.533 1.402 1.31.044.61.079 1.514.079 2.842s-.035 2.23-.08 2.841c-.055.777-.622 1.288-1.4 1.311-.28.009-.617.014-1.02.014s-.74-.005-1.02-.014" opacity="0.35"></path><path d="M17.467 5.042c-.042.824-.825 1.133-1.432.576a47 47 0 0 1-1-.949 536 536 0 0 0-3.91 3.595c-.431.4-1.132.356-1.509-.096A96 96 0 0 0 7.36 5.543a37 37 0 0 0-4.124 3.528 1.042 1.042 0 0 1-1.473-1.474C3.338 6.023 5.066 4.546 6.92 3.303l.003-.002a1.04 1.04 0 0 1 1.314.13c.807.806 1.536 1.694 2.274 2.563a530 530 0 0 1 3.052-2.8 45 45 0 0 1-.845-.895c-.558-.607-.248-1.39.575-1.432 1.05-.053 2.13-.084 3.167.11.468.088.81.43.898.898.194 1.038.163 2.117.11 3.167"></path></g></svg></span>
 
                   <span class="px-2">
                     {{ item.name }}
@@ -248,52 +236,18 @@ const menuItems = [
 ];
 const menuItems2 = [
   {
-    name: 'Dashboard 1',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M3 19.5v-15.5c0 -0.55 0.45 -1 1 -1h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-14.5Z" },
-        { d: "M8 7h8" },
-        { d: "M8 10h8" },
-        { d: "M8 13h4" },
-      ]
-    }
+    name: 'Analitics',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><g fill="currentColor" clip-path="url(#graph_svg__clip0_4314_12611)"><path d="M2.174 19.153c-.697-.017-1.225-.437-1.282-1.132a22 22 0 0 1-.059-1.771c0-.784.025-1.356.06-1.772.056-.695.584-1.114 1.281-1.132.305-.008.687-.013 1.16-.013s.853.005 1.158.013c.697.018 1.225.437 1.282 1.132.034.416.06.989.06 1.772s-.026 1.355-.06 1.771c-.057.695-.585 1.115-1.282 1.132-.305.008-.686.013-1.159.013-.472 0-.854-.005-1.159-.013M15.704 19.15c-.812-.033-1.381-.604-1.434-1.415-.054-.84-.104-2.207-.104-4.402 0-2.194.05-3.56.104-4.402.053-.81.622-1.382 1.434-1.414q.4-.016.962-.017.563.001.963.017c.812.032 1.381.603 1.434 1.414.055.842.104 2.208.104 4.402s-.05 3.561-.104 4.402c-.053.811-.622 1.382-1.434 1.414q-.4.017-.963.018-.561 0-.962-.018M8.98 19.152c-.778-.023-1.345-.534-1.4-1.31A41 41 0 0 1 7.5 15c0-1.328.035-2.232.08-2.842.055-.777.622-1.287 1.4-1.31a33.672 33.672 0 0 1 2.039 0c.779.023 1.346.533 1.402 1.31.044.61.079 1.514.079 2.842s-.035 2.23-.08 2.841c-.055.777-.622 1.288-1.4 1.311-.28.009-.617.014-1.02.014s-.74-.005-1.02-.014" opacity="0.35"></path><path d="M17.467 5.042c-.042.824-.825 1.133-1.432.576a47 47 0 0 1-1-.949 536 536 0 0 0-3.91 3.595c-.431.4-1.132.356-1.509-.096A96 96 0 0 0 7.36 5.543a37 37 0 0 0-4.124 3.528 1.042 1.042 0 0 1-1.473-1.474C3.338 6.023 5.066 4.546 6.92 3.303l.003-.002a1.04 1.04 0 0 1 1.314.13c.807.806 1.536 1.694 2.274 2.563a530 530 0 0 1 3.052-2.8 45 45 0 0 1-.845-.895c-.558-.607-.248-1.39.575-1.432 1.05-.053 2.13-.084 3.167.11.468.088.81.43.898.898.194 1.038.163 2.117.11 3.167"></path></g></svg>'
   },
   {
-    name: 'Task',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" }
-      ]
-    }
+    name: 'Ecommerce',
+    icon:'<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M2.842 1.667a1.042 1.042 0 0 0 0 2.083h.702c.197 0 .368.139.408.332.186.891.713 3.384 1.135 5.085a58 58 0 0 0 1.294 4.502 2.501 2.501 0 0 1 3.594 1.286c.623.028 1.35.045 2.195.045.715 0 1.333-.012 1.868-.033a2.5 2.5 0 0 1 3.611-1.29c.294-.741.69-1.982 1.026-3.885.24-1.365.389-2.39.48-3.133C19.267 5.745 18.554 5 17.633 5H6.383l-.517-2.07a1.67 1.67 0 0 0-1.617-1.263z" opacity="0.32"></path><path fill="currentColor" d="M14.625 8.829a.83.83 0 1 0-1.65-.165l-.25 2.508a.83.83 0 1 0 1.65.165zM10.625 8.664a.83.83 0 1 0-1.65.165l.25 2.508a.83.83 0 1 0 1.65-.165zM13.884 15.833a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0M5.134 15.833a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0"></path></svg>'
   },
   {
-    name: 'New',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" }
-      ]
-    }
+    name: 'Business',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M16.667 6.875V15c0 2.5-1.492 3.334-3.334 3.334H6.667c-1.842 0-3.334-.834-3.334-3.334V6.875c0-2.708 1.492-3.333 3.334-3.333 0 .517.208.983.55 1.325.341.342.808.55 1.325.55h2.916a1.88 1.88 0 0 0 1.875-1.875c1.842 0 3.334.625 3.334 3.333" opacity="0.35"></path><path fill="currentColor" d="M13.333 3.542a1.88 1.88 0 0 1-1.875 1.875H8.542c-.517 0-.984-.208-1.325-.55a1.86 1.86 0 0 1-.55-1.325c0-1.033.841-1.875 1.875-1.875h2.916c.517 0 .984.208 1.325.55.342.342.55.808.55 1.325M10 11.458H6.667a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625H10a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625M13.333 14.792H6.667a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h6.666a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625"></path></svg>'
   },
-  {
-    name: 'Files',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" }
-      ]
-    }
-  }
+
 ]
   ;
   const menuItems3 = [

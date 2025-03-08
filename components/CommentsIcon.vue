@@ -2,7 +2,7 @@
   <div class="container">
     <div class="demo-section">
       <div class="icon-container" ref="interactiveIcon" @click="animateInteractiveIcon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="chat-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="chat-icon">
           <mask id="chatMask3">
             <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
               <path fill="#fff" fill-opacity="0" stroke-dasharray="72" stroke-dashoffset="0" d="M3 19.5v-15.5c0 -0.55 0.45 -1 1 -1h16c0.55 0 1 0.45 1 1v12c0 0.55 -0.45 1 -1 1h-14.5Z"></path>
@@ -87,8 +87,8 @@ export default {
 }
 
 .icon-container svg {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     color: #eaf0ed;
 }
 
