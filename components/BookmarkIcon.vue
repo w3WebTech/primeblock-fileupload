@@ -6,7 +6,7 @@
       <div class="icon-container" ref="interactiveIcon3" @click="animateInteractiveIcon3">
         <!-- New SVG with animation -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <g fill="#fff" stroke="#6b58a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path stroke-dasharray="72" stroke-dashoffset="72" d="M12 3h7v18h-14v-18h7Z">
               <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="72;0"/>
             </path>
@@ -109,10 +109,10 @@ export default {
 .icon-container svg {
   width: 24px;
   height: 24px;
-  color: #eaf0ed;
+  color: #B29AFD;
 }
 
 .icon-container:hover svg {
-  color: #fff;
+  color: #B29AFD;
 }
 </style>

@@ -5,22 +5,26 @@
       class="h-full lg:h-auto flex-shrink-0 left-0 top-0 z-20 border-r border-surface transition-all duration-300"
       :class="isFixedSidebar ? 'w-[300px]' : 'w-0'" @mouseenter="openSidebar" @mouseleave="handleMouseLeave">
       <div class="flex h-full">
-        <div class="flex flex-col h-full bg-[#2F449D] flex-shrink-0 select-none">
+        <div class="flex flex-col h-full bg-[#FFFFFF] flex-shrink-0 select-none border-r-2 border-dotted">
           <div class="flex items-center justify-between flex-shrink-0 h-[60px] mx-5">
             <div class="flex items-center justify-center">
               <svg height="36" viewBox="0 0 48 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M33.1548 9.65956L23.9913 4.86169L5.54723 14.5106L0.924465 12.0851L23.9913 0L37.801 7.23403L33.1548 9.65956ZM23.9931 19.3085L42.4255 9.65955L47.0717 12.0851L23.9931 24.1595L10.1952 16.9361L14.8297 14.5106L23.9931 19.3085ZM4.6345 25.8937L0 23.4681V37.9149L23.0669 50V45.1489L4.6345 35.4894V25.8937ZM18.4324 28.2658L0 18.6169V13.7658L23.0669 25.8403V40.2977L18.4324 37.8615V28.2658ZM38.7301 23.468V18.6169L24.9205 25.8403V49.9999L29.555 47.5743V28.2659L38.7301 23.468ZM43.3546 35.4892V16.1914L48.0008 13.7659V37.9148L34.1912 45.1488V40.2977L43.3546 35.4892Z"
-                  class="fill-[#FFFFFF]" />
+                  class="fill-[#6b58a8]" />
               </svg>
             </div>
           </div>
           <div class="overflow-y-auto mt-4">
-            <ul class="list-none py-4 pl-2 pr-0 m-0">
+            <ul class="list-none py-4 px-2 m-0">
               <li class="mb-2" v-for="(item, index) in menuItems" :key="index">
-                <a class="rounded-l-full flex items-center cursor-pointer py-4  px-4 justify-center hover:bg-[#3B55C4] text-[#FFFFFF] duration-150 transition-colors"
-                  :class="{ 'bg-[#3B55C4]': activeTab2 === index }" @click="activeTab2 = index"
+                <a class="rounded-md flex items-center cursor-pointer py-4  px-2 justify-center text-[#B29AFD] duration-150 transition-colors  "
+                  :class="{ '': activeTab2 === index }" @click="activeTab2 = index"
                   @mouseenter="changeActiveTab(index)"       v-tooltip="{ value: item.name, autoHide: false }"
+
+
+
+
                   >
                                   
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
@@ -28,7 +32,7 @@
                   <!-- <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
 
                     , { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]" style="font-size: 1.5rem"></i> -->
-                    <component :is="item.component" class="text-xl text-[#FFFFFF]" :class="{ 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }" style="font-size: 1.5rem"></component>
+                    <component :is="item.component" class="text-xl text-[#B29AFD] hover:bg-[#ebe8fa] p-2 rounded-md " :class="{ 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }" style="font-size: 1.5rem"></component>
 
                 </a>
               </li>
@@ -37,7 +41,7 @@
           <div class="mt-auto">
             <hr class="mb-4 mx-2 border-t border-0 border-[#FFFFFF]/20" />
             <a
-              class="m-4 flex items-center cursor-pointer p-2 justify-center hover:bg-[#3B55C4] rounded-border text-[#cbd5e1] hover:text-[#ffffff] duration-150 transition-colors">
+              class="m-4 flex items-center cursor-pointer p-2 justify-center hover:bg-[#dad5f2] rounded-border text-[#cbd5e1] hover:text-[#ffffff] duration-150 transition-colors">
               <img
                 src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars /circle/avatar-f-1.png"
                 class="w-6 h-6" />
@@ -59,24 +63,32 @@
   >
 
 
-
-          <div class="justify-end mb-4 flex">
-            <div class="flex items-center gap-4 p-4
+          <div class="justify-end  flex justify-between px-4 ">
+            <div>
+              <div v-if=" activeTab2 === 0" class=" font-semibold text-lg text-[#484e59]"> Dashboard</div>
+              <div v-if=" activeTab2 === 1"  class=" font-semibold text-lg text-[#484e59]"> Bookmarks</div>
+              <div v-if=" activeTab2 === 2"  class=" font-semibold text-lg text-[#484e59]"> Team</div>
+              <div v-if=" activeTab2 === 3"  class=" font-semibold text-lg text-[#484e59]"> Messages</div>
+              <div v-if=" activeTab2 === 4"  class=" font-semibold text-lg text-[#484e59]"> Calender</div>
+            </div>
+          
+            <div class="flex items-center
             ">
               <Checkbox inputId="size_normal" name="size" :value="true" v-model="isFixedSidebar" size="small"
                 @change="toggleSidebar" />
             </div>
+         
           </div>
-          <div class="rounded-border flex-auto">
+          <div class="rounded-border flex-auto cols-span-10">
             <div class="px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 0 }">
-              Dashboard
+              <!-- Dashboard -->
               <div v-show="activeTab2 === 0"
     class="flex-col justify-center text-sm my-5 transition-all duration-500 ease-in-out opacity-0"
     :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
     style="animation: slideDown 0.5s ease-out forwards;">
 
     <div v-for="(item, index) in menuItems2" :key="index"
-      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 hover:text-gray-700 text-[#4b4d59] custom font-sans "
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 text-[#4b4d59] custom font-sans hover:bg-[#b49ef7] hover:text-[#fff]"
       :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
       <span class="group">
@@ -95,44 +107,32 @@
 
             </div>
             <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 1 }">
-              Bookmarks
+              <!-- Bookmarks -->
 
               <div v-show="activeTab2 === 1"
-                class="flex-col justify-center text-sm my-10 transition-all duration-500 ease-in-out opacity-0"
-                :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
-                style="animation: slideDown 0.5s ease-out forwards;">
+    class="flex-col justify-center text-sm my-5 transition-all duration-500 ease-in-out opacity-0"
+    :class="{ 'opacity-100': activeTab2 === 0, 'opacity-0': activeTab2 !== 0, 'translate-y-0': activeTab2 === 0, 'translate-y-10': activeTab2 !== 0 }"
+    style="animation: slideDown 0.5s ease-out forwards;">
 
-                <div v-for="(item, index) in menuItems3" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
-                  :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
+    <div v-for="(item, index) in menuItems3" :key="index"
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105  text-[#4b4d59] custom font-sans hover:bg-[#b49ef7] hover:text-[#fff] "
+      :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
-                  <span class="group">
-                    <!-- Icon animation on hover -->
-                    <svg v-if="item.icon" xmlns="http://www.w3.org/2000/svg" :width="item.icon.width"
-                      :height="item.icon.height" :viewBox="item.icon.viewBox"
-                      class="transition-transform duration-300 
-                       ">
-                      <g v-for="(path, idx) in item.icon.paths" :key="idx" :fill="path.fill || 'none'"
-                        :stroke="path.stroke || 'currentColor'" :stroke-linecap="path.strokeLinecap || 'round'"
-                        :stroke-linejoin="path.strokeLinejoin || 'round'" :stroke-width="path.strokeWidth || 2">
-                        <path :d="path.d" />
-                      </g>
-                    </svg>
-                  </span>
+      <span class="group">
+        <!-- Icon rendering -->
+        <div v-html="item.icon"></div>
+      </span>
 
-                  <span class="px-2">
-                    {{ item.name }}
-                  </span>
-                </div>
-                
-
-
-
-              </div>
+      <!-- Menu Item Name -->
+      <span class="px-2">
+        {{ item.name }}
+      </span>
+    </div>
+  </div>
 
             </div>
             <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 2 }">
-              Team
+              <!-- Team -->
 
 
            
@@ -142,7 +142,7 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems4" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  hover:text-gray-700 text-gray-400 "
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  text-gray-400 hover:bg-[#b49ef7] hover:text-[#fff]"
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <!-- <span class="group">
@@ -171,7 +171,7 @@
               </div>
             </div>
             <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 3 }">
-              Messages
+              <!-- Messages -->
 
               <div class=" flex justify-center text-xs  my-10
               ">
@@ -179,7 +179,7 @@
               </div>
             </div>
             <div class=" px-4 font-semibold text-lg text-[#484e59]" :class="{ hidden: activeTab2 !== 4 }">
-              Calendar
+              <!-- Calendar -->
 
               <div class=" flex justify-center text-xs  my-10
               ">
@@ -188,6 +188,8 @@
               </div>
             </div>
           </div>
+       
+ 
         </div>
       </div>
     </div>
@@ -258,49 +260,19 @@ const menuItems2 = [
   const menuItems3 = [
   {
     name: 'Home',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M12 3L2 12h3v7h6v-4h6v4h3z" }
-      ]
-    }
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" fill-rule="evenodd" d="M3.436 1.87c.995-.102 2.651-.203 5.314-.203s4.319.1 5.314.203c.85.088 1.47.718 1.567 1.567.102.886.202 2.224.202 4.063 0 1.84-.1 3.177-.202 4.063-.098.85-.716 1.48-1.567 1.568-.879.09-2.273.18-4.421.199a1.26 1.26 0 0 0-.887.373l-1.41 1.43c-.611.62-1.669.26-1.775-.605l-.111-.91a.42.42 0 0 0-.397-.367 33 33 0 0 1-1.626-.12c-.85-.088-1.47-.719-1.568-1.568-.102-.886-.202-2.224-.202-4.063s.1-3.177.202-4.063c.098-.849.717-1.48 1.567-1.567M5.833 5a.833.833 0 1 0 0 1.667h5.834a.833.833 0 1 0 0-1.667zm0 3.75a.833.833 0 1 0 0 1.667h3.334a.833.833 0 1 0 0-1.667z" clip-rule="evenodd" opacity="0.35"></path><path fill="currentColor" d="M5 5.833c0-.46.372-.833.833-.833h5.833a.833.833 0 0 1 0 1.667H5.833a.833.833 0 0 1-.834-.834M5 9.583c0-.46.372-.833.833-.833h3.333a.833.833 0 1 1 0 1.667H5.833a.833.833 0 0 1-.834-.834M8.355 14.11l.4-.406c.234-.238.554-.371.887-.374 2.148-.02 3.543-.109 4.422-.2.85-.087 1.469-.718 1.566-1.567.067-.578.133-1.35.17-2.329.423.025.756.055 1.015.084.52.059.903.435.968.956.068.544.133 1.393.133 2.643s-.065 2.1-.133 2.643c-.065.521-.448.897-.969.956-.348.04-.83.079-1.484.108a.42.42 0 0 0-.394.337l-.143.722a.625.625 0 0 1-1.026.348l-1.207-1.065a1.27 1.27 0 0 0-.81-.314 27 27 0 0 1-2.315-.136 1.07 1.07 0 0 1-.969-.955 17 17 0 0 1-.111-1.452"></path></svg>'
   },
   {
     name: 'Messages',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M4 4h16v12H4z" },
-        { d: "M4 16l4-4h8l4 4" }
-      ]
-    }
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M3.333 8.296V4.167a2.5 2.5 0 0 1 2.5-2.5h8.334a2.5 2.5 0 0 1 2.5 2.5v4.13c0 .545-.266 1.055-.722 1.354-1.41.924-4.52 2.85-5.945 2.85s-4.535-1.926-5.945-2.85a1.61 1.61 0 0 1-.722-1.355" opacity="0.35"></path><path fill="currentColor" d="M3.333 5.209c-.425.315-.8.603-1.101.839-.502.392-.816.97-.859 1.606-.058.865-.124 2.316-.124 4.43 0 1.997.119 3.404.23 4.282.09.724.575 1.298 1.29 1.446 1.146.237 3.334.521 7.23.521s6.085-.284 7.23-.521c.716-.148 1.2-.722 1.291-1.446.111-.878.23-2.285.23-4.283 0-2.113-.067-3.564-.125-4.429a2.23 2.23 0 0 0-.858-1.606 56 56 0 0 0-1.101-.839v3.087c0 .545-.265 1.055-.722 1.354-1.41.925-4.52 2.85-5.945 2.85s-4.534-1.925-5.945-2.85a1.61 1.61 0 0 1-.721-1.354z"></path><path fill="currentColor" d="M5.833 4.792c0-.345.28-.625.625-.625h3.75a.625.625 0 1 1 0 1.25h-3.75a.625.625 0 0 1-.625-.625M5.833 7.708c0-.345.28-.625.625-.625h6.25a.625.625 0 1 1 0 1.25h-6.25a.625.625 0 0 1-.625-.625"></path></svg>'
   },
   {
     name: 'Notifications',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M16 16v1c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2v-1" },
-        { d: "M8 11V7c0-3.87 3.13-7 7-7s7 3.13 7 7v4" }
-      ]
-    }
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M18.333 8.75c0 2.255-.06 4.022-.117 5.168-.038.781-.794 1.341-1.568 1.237-1.27-.171-3.415-.363-6.648-.363s-5.377.192-6.648.363c-.774.104-1.53-.456-1.568-1.237a107 107 0 0 1-.117-5.168c0-2.255.06-4.021.117-5.168.038-.78.794-1.34 1.568-1.236 1.27.17 3.416.363 6.648.363 3.233 0 5.378-.192 6.648-.363.774-.105 1.53.456 1.568 1.236.056 1.147.117 2.913.117 5.168" opacity="0.32"></path><path fill="currentColor" d="M4.659 15.008a27 27 0 0 0-.779 2.075c-.073.227.064.465.3.488.387.038.8.02 1.116-.007.345-.03.647-.227.834-.517.492-.762.969-1.556 1.352-2.213-1.123.04-2.059.103-2.823.174M12.518 14.834c.383.657.86 1.451 1.352 2.213.187.29.49.487.834.517a6.4 6.4 0 0 0 1.116.007c.237-.023.373-.262.3-.488a27 27 0 0 0-.779-2.075c-.764-.07-1.7-.134-2.823-.174"></path></svg>'
   },
   {
     name: 'Settings',
-    icon: {
-      width: 24,
-      height: 24,
-      viewBox: '0 0 24 24',
-      paths: [
-        { d: "M19 12h-4.6a5.42 5.42 0 0 0-1.3-2.6l3.1-3.1a1.99 1.99 0 1 0-2.8-2.8l-3.1 3.1a5.42 5.42 0 0 0-2.6-1.3V5a1.99 1.99 0 1 0-4 0v4.6a5.42 5.42 0 0 0-2.6 1.3l-3.1-3.1a1.99 1.99 0 1 0-2.8 2.8l3.1 3.1a5.42 5.42 0 0 0-1.3 2.6V19a1.99 1.99 0 1 0 4 0v-4.6a5.42 5.42 0 0 0 2.6-1.3l3.1 3.1a1.99 1.99 0 1 0 2.8-2.8l-3.1-3.1a5.42 5.42 0 0 0 1.3-2.6H19a1.99 1.99 0 1 0 0-4z" }
-      ]
-    }
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M16.667 6.875V15c0 2.5-1.492 3.334-3.334 3.334H6.667c-1.842 0-3.334-.834-3.334-3.334V6.875c0-2.708 1.492-3.333 3.334-3.333 0 .517.208.983.55 1.325.341.342.808.55 1.325.55h2.916a1.88 1.88 0 0 0 1.875-1.875c1.842 0 3.334.625 3.334 3.333" opacity="0.35"></path><path fill="currentColor" d="M13.333 3.542a1.88 1.88 0 0 1-1.875 1.875H8.542c-.517 0-.984-.208-1.325-.55a1.86 1.86 0 0 1-.55-1.325c0-1.033.841-1.875 1.875-1.875h2.916c.517 0 .984.208 1.325.55.342.342.55.808.55 1.325M10 11.458H6.667a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625H10a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625M13.333 14.792H6.667a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h6.666a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625"></path></svg>'
   }
 ];
 
@@ -432,14 +404,14 @@ onMounted(async () => {
 
 
 .p-checkbox-checked .p-checkbox-box {
-  border-color: #2F449D !important;
-  background: #2F449D !important;
+  border-color: #6b58a8 !important;
+  background: #6b58a8 !important;
 }
 
 .p-menu-item .focus {
-  border-color: #2F449D !important;
-  background: #2F449D !important;
-  color: #2F449D !important;
+  border-color: #6b58a8 !important;
+  background: #6b58a8 !important;
+  color: #6b58a8 !important;
 
 }
 
@@ -535,7 +507,7 @@ onMounted(async () => {
   }
 }
 .custom{
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Inter',sans-serif;
 }
 </style>
