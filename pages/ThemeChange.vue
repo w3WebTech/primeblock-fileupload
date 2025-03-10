@@ -11,7 +11,7 @@
               <svg height="36" viewBox="0 0 48 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M33.1548 9.65956L23.9913 4.86169L5.54723 14.5106L0.924465 12.0851L23.9913 0L37.801 7.23403L33.1548 9.65956ZM23.9931 19.3085L42.4255 9.65955L47.0717 12.0851L23.9931 24.1595L10.1952 16.9361L14.8297 14.5106L23.9931 19.3085ZM4.6345 25.8937L0 23.4681V37.9149L23.0669 50V45.1489L4.6345 35.4894V25.8937ZM18.4324 28.2658L0 18.6169V13.7658L23.0669 25.8403V40.2977L18.4324 37.8615V28.2658ZM38.7301 23.468V18.6169L24.9205 25.8403V49.9999L29.555 47.5743V28.2659L38.7301 23.468ZM43.3546 35.4892V16.1914L48.0008 13.7659V37.9148L34.1912 45.1488V40.2977L43.3546 35.4892Z"
-                  class="fill-[#6b58a8]" />
+                  class="fill-[#2f449d]" />
               </svg>
             </div>
           </div>
@@ -21,19 +21,14 @@
                 <a class="rounded-md flex items-center cursor-pointer   px-2 justify-center text-[#B29AFD] duration-150 transition-colors  "
                   :class="{ '': activeTab2 === index }" @click="activeTab2 = index"
                   @mouseenter="changeActiveTab(index)"       
-              
-
-
-
-
-                  >
+            >
                        <!-- v-tooltip="{ value: item.name, autoHide: false }" -->               
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
 
                   <!-- <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
 
                     , { 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }]" style="font-size: 1.5rem"></i> -->
-                    <component :is="item.component" class="text-xl text-[#B29AFD] hover:bg-[#ebe8fa] p-2 rounded-md " :class="{ 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }" style="font-size: 1.5rem"></component>
+                    <component :is="item.component" class="text-xl text-[#B29AFD] hover:bg-[#dfeafa] p-2 rounded-md " :class="{ 'hover:text-gray-400': isSidebarOpen || isFixedSidebar }" style="font-size: 1.5rem"></component>
 
                 </a>
               </li>
@@ -89,7 +84,7 @@
     style="animation: slideDown 0.5s ease-out forwards;">
 
     <div v-for="(item, index) in menuItems2" :key="index"
-      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 text-[#4b4d59] custom font-sans hover:bg-[#b49ef7] hover:text-[#fff]"
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105 text-[#4b4d59] custom font-sans hover:bg-[#dfeafa] "
       :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
       <span class="group">
@@ -116,7 +111,7 @@
     style="animation: slideDown 0.5s ease-out forwards;">
 
     <div v-for="(item, index) in menuItems3" :key="index"
-      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105  text-[#4b4d59] custom font-sans hover:bg-[#b49ef7] hover:text-[#fff] "
+      class="flex py-3 px-4 rounded-lg duration-200 hover:scale-105  text-[#4b4d59] custom font-sans hover:bg-[#dfeafa]  "
       :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
       <span class="group">
@@ -143,7 +138,7 @@
                 style="animation: slideDown 0.5s ease-out forwards;">
 
                 <div v-for="(item, index) in menuItems4" :key="index"
-                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  text-gray-400 hover:bg-[#b49ef7] hover:text-[#fff]"
+                  class="flex py-3 px-4 rounded-lg  duration-200 hover:scale-105  text-gray-400 hover:bg-[#dfeafa] "
                   :style="{ opacity: 0, animation: 'fadeIn ' + (0.5 + index * 0.2) + 's ease-out forwards, expandSize 0.5s ease-out forwards' }">
 
                   <!-- <span class="group">
@@ -405,14 +400,14 @@ onMounted(async () => {
 
 
 .p-checkbox-checked .p-checkbox-box {
-  border-color: #6b58a8 !important;
-  background: #6b58a8 !important;
+  border-color: #2f449d !important;
+  background: #2f449d !important;
 }
 
 .p-menu-item .focus {
-  border-color: #6b58a8 !important;
-  background: #6b58a8 !important;
-  color: #6b58a8 !important;
+  border-color: #2f449d !important;
+  background: #2f449d !important;
+  color: #2f449d !important;
 
 }
 

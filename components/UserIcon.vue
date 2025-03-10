@@ -5,7 +5,7 @@
       <!-- Fourth New Icon -->
       <div class="icon-container" ref="interactiveIcon4" @click="animateInteractiveIcon4">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <g fill="#fff" stroke="#6b58a8" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <g fill="#fff" stroke="#2f449d" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M4 21v-1c0 -3.31 2.69 -6 6 -6h4c3.31 0 6 2.69 6 6v1">
               <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0"/>
             </path>
