@@ -18,15 +18,16 @@
           <div class="overflow-y-auto mt-4">
             <ul class="list-none py-4 px-2 m-0">
               <li class="mb-2" v-for="(item, index) in menuItems" :key="index">
-                <a class="rounded-md flex items-center cursor-pointer py-4  px-2 justify-center text-[#B29AFD] duration-150 transition-colors  "
+                <a class="rounded-md flex items-center cursor-pointer   px-2 justify-center text-[#B29AFD] duration-150 transition-colors  "
                   :class="{ '': activeTab2 === index }" @click="activeTab2 = index"
-                  @mouseenter="changeActiveTab(index)"       v-tooltip="{ value: item.name, autoHide: false }"
+                  @mouseenter="changeActiveTab(index)"       
+              
 
 
 
 
                   >
-                                  
+                       <!-- v-tooltip="{ value: item.name, autoHide: false }" -->               
                   <!-- Keep icon color consistent with text-[#FFFFFF] -->
 
                   <!-- <i :class="['text-xl', item.icon, 'text-[#FFFFFF]'
