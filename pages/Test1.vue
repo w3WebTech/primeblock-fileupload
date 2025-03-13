@@ -206,8 +206,8 @@
       <div class="p-8 flex flex-col flex-auto">
         <div class="border-2 border-dashed rounded-border border-surface bg-[#ffffff] flex-auto p-5"
           :class="{ 'w-[calc(100%-5px)] ': isFixedSidebar, ' ml-20': !isFixedSidebar }">
-          <!-- <Dashboard :client-name="clientName.value" :client-code="clientCode.value" /> -->
-          <component :is="currentComponent" :client-name="clientName.value" :client-code="clientCode.value" />
+          <!-- <Dashboard :client-name="clientName.value" :client-code="clientcode.value" /> -->
+          <component :is="currentComponent"  :customValue="clientcode" />
 
         </div>
       </div>
@@ -227,9 +227,11 @@ import UserIcon from './components/UserIcon.vue';
 import CommentsIcon from './components/CommentsIcon.vue';
 import Analytics from './components/Analytics.vue';
 import Ecommerce from './components/Ecommerce.vue';
-// import Business from './components/Business.vue';
+import Business from './components/Business.vue';
+import Trades from './components/Trades.vue';
+import Funds from './components/Funds.vue';
 import Tooltip from 'primevue/tooltip';
-
+import ProfitLoss from './components/ProfitLoss.vue';
 
 
 const activeTab2 = ref(0);
@@ -238,7 +240,7 @@ const isFixedSidebar = ref(false);
 let currentComponent = ref('Dashboard');
 import { useRoute } from 'vue-router'; // Add this import
 const clientName = ref('');
-const clientCode = ref('');
+const clientcode = ref('');
 const selectComponent = (name) => {
   
   const selectedItem = menuItems2.find(item => item.name === name);
@@ -269,11 +271,26 @@ const menuItems2 = [
     icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M3.333 8.296V4.167a2.5 2.5 0 0 1 2.5-2.5h8.334a2.5 2.5 0 0 1 2.5 2.5v4.13c0 .545-.266 1.055-.722 1.354-1.41.924-4.52 2.85-5.945 2.85s-4.535-1.926-5.945-2.85a1.61 1.61 0 0 1-.722-1.355" opacity="0.35"></path><path fill="currentColor" d="M3.333 5.209c-.425.315-.8.603-1.101.839-.502.392-.816.97-.859 1.606-.058.865-.124 2.316-.124 4.43 0 1.997.119 3.404.23 4.282.09.724.575 1.298 1.29 1.446 1.146.237 3.334.521 7.23.521s6.085-.284 7.23-.521c.716-.148 1.2-.722 1.291-1.446.111-.878.23-2.285.23-4.283 0-2.113-.067-3.564-.125-4.429a2.23 2.23 0 0 0-.858-1.606 56 56 0 0 0-1.101-.839v3.087c0 .545-.265 1.055-.722 1.354-1.41.925-4.52 2.85-5.945 2.85s-4.534-1.925-5.945-2.85a1.61 1.61 0 0 1-.721-1.354z"></path><path fill="currentColor" d="M5.833 4.792c0-.345.28-.625.625-.625h3.75a.625.625 0 1 1 0 1.25h-3.75a.625.625 0 0 1-.625-.625M5.833 7.708c0-.345.28-.625.625-.625h6.25a.625.625 0 1 1 0 1.25h-6.25a.625.625 0 0 1-.625-.625"></path></svg>'
   
   },
-  // {
-  //   name: 'Business',
-  //   component: Business, // Reference to the Business component
-  //   icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5">...</svg>'
-  // },
+   {
+     name: 'FA Summary',
+     component: Business, // Reference to the Business component
+     icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" class=" h-5 w-5"><path fill="currentColor" d="M12.492.667H5.508C2.475.667.667 2.475.667 5.509v6.983c0 3.033 1.808 4.842 4.841 4.842h6.984c3.033 0 4.841-1.809 4.841-4.842V5.509c0-3.034-1.808-4.842-4.841-4.842" opacity="0.35"></path><path fill="#475569" d="M14.258 6.392a.624.624 0 0 1-.625.625H9.258a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h4.375c.35 0 .625.283.625.625M7.308 5.584 5.433 7.46a.62.62 0 0 1-.441.183.6.6 0 0 1-.442-.183l-.625-.625a.614.614 0 0 1 0-.883.63.63 0 0 1 .883 0l.184.183 1.433-1.433a.63.63 0 0 1 .883 0 .63.63 0 0 1 0 .883M14.258 12.226a.624.624 0 0 1-.625.625H9.258a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h4.375c.35 0 .625.283.625.625M7.308 11.417l-1.875 1.875a.62.62 0 0 1-.441.184.6.6 0 0 1-.442-.184l-.625-.625a.614.614 0 0 1 0-.883.63.63 0 0 1 .883 0l.184.183 1.433-1.433a.63.63 0 0 1 .883 0 .63.63 0 0 1 0 .883"></path></svg>'
+   },
+   {
+     name: 'Trades',
+     component: Trades, // Reference to the Business component
+     icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M5.8 1.667c.348 0 .63.258.63.577v1.165c.558-.01 1.185-.01 1.89-.01h3.36c.705 0 1.33 0 1.89.01V2.244c0-.319.282-.577.63-.577s.63.258.63.577v1.215c1.208.088 2.003.306 2.586.84s.82 1.26.917 2.368V7.5H1.667v-.833c.096-1.108.334-1.833.917-2.368.584-.534 1.377-.752 2.586-.84V2.244c0-.319.283-.577.63-.577"></path><path fill="currentColor" d="M18.333 11.667V10c0-.7-.01-1.946-.021-2.5H1.672c-.011.554 0 1.8 0 2.5v1.667c0 3.142 0 4.714.975 5.69.977.976 2.548.976 5.69.976h3.333c3.142 0 4.712 0 5.688-.976.975-.976.975-2.548.975-5.69" opacity="0.35"></path><path fill="currentColor" d="M15 13.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0"></path></svg>'
+   },
+   {
+     name: 'Profit / Loss',
+     component: ProfitLoss, // Reference to the Business component
+     icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M16.667 6.875V15c0 2.5-1.492 3.334-3.334 3.334H6.667c-1.842 0-3.334-.834-3.334-3.334V6.875c0-2.708 1.492-3.333 3.334-3.333 0 .517.208.983.55 1.325.341.342.808.55 1.325.55h2.916a1.88 1.88 0 0 0 1.875-1.875c1.842 0 3.334.625 3.334 3.333" opacity="0.35"></path><path fill="currentColor" d="M13.333 3.542a1.88 1.88 0 0 1-1.875 1.875H8.542c-.517 0-.984-.208-1.325-.55a1.86 1.86 0 0 1-.55-1.325c0-1.033.841-1.875 1.875-1.875h2.916c.517 0 .984.208 1.325.55.342.342.55.808.55 1.325M10 11.458H6.667a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625H10a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625M13.333 14.792H6.667a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h6.666a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625"></path></svg>'
+   },
+   {
+     name: 'Funds',
+     component: Funds, // Reference to the Business component
+     icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M10 4.417v13.358a.84.84 0 0 1-.408-.092l-.034-.016c-1.6-.875-4.391-1.792-6.2-2.034l-.241-.033c-.8-.1-1.45-.85-1.45-1.65V3.883a1.64 1.64 0 0 1 1.8-1.658c1.75.142 4.4 1.025 5.883 1.95l.208.125a.9.9 0 0 0 .442.117" opacity="0.35"></path><path fill="currentColor" d="M18.333 3.891V13.95c0 .8-.65 1.55-1.45 1.65l-.275.033c-1.816.242-4.616 1.167-6.216 2.05a.74.74 0 0 1-.392.092V4.416a.9.9 0 0 0 .442-.116l.141-.092c1.484-.933 4.142-1.825 5.892-1.975h.05a1.642 1.642 0 0 1 1.808 1.658M6.458 7.7H4.583a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h1.875a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625M7.083 10.2h-2.5a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h2.5a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625"></path></svg>'
+   },
 ];
 const menuItems3 = [
   {
@@ -396,10 +413,10 @@ onMounted(async () => {
   clientName.value = route.query.clientName
     ? route.query.clientName
     : "";
-  clientCode.value = route.query.clientCode
-    ? route.query.clientCode
+  clientcode.value = route.query.clientcode
+    ? route.query.clientcode
     : "";
-  console.log(clientName.value, "clientName.value")
+  console.log(clientcode.value, "clientcode.value")
 
 
 });
