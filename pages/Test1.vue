@@ -67,6 +67,20 @@
 
             <div class="flex items-center
             ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <Checkbox inputId="size_normal" name="size" :value="true" v-model="isFixedSidebar" size="small"
                 @change="toggleSidebar" />
             </div>
@@ -232,24 +246,24 @@ import Trades from './components/Trades.vue';
 import Funds from './components/Funds.vue';
 import Tooltip from 'primevue/tooltip';
 import ProfitLoss from './components/ProfitLoss.vue';
-
+import { useRoute, useRouter } from 'vue-router';
 
 const activeTab2 = ref(0);
 const isSidebarOpen = ref(false);
 const isFixedSidebar = ref(false);
 let currentComponent = ref('Dashboard');
-import { useRoute } from 'vue-router'; // Add this import
+
 const clientName = ref('');
 const clientcode = ref('');
+
 const selectComponent = (name) => {
-  
   const selectedItem = menuItems2.find(item => item.name === name);
   if (selectedItem) {
     currentComponent.value = selectedItem.component; 
+    toggleSidebar();
     console.log(currentComponent,"currentComponent")
   }
 }
-
 
 const menuItems = [
   { component: ChatIcon, name: 'Dashboard' }, // Chat icon component
@@ -259,6 +273,7 @@ const menuItems = [
   { component: CalenderIcon, name: "Calender" },  // Bookmark icon component
 
 ];
+
 const menuItems2 = [
   {
     name: 'Ledger',
@@ -268,8 +283,7 @@ const menuItems2 = [
   {
     name: 'Withdraw',
     component: Ecommerce, // Reference to the Ecommerce component
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M3.333 8.296V4.167a2.5 2.5 0 0 1 2.5-2.5h8.334a2.5 2.5 0 0 1 2.5 2.5v4.13c0 .545-.266 1.055-.722 1.354-1.41.924-4.52 2.85-5.945 2.85s-4.535-1.926-5.945-2.85a1.61 1.61 0 0 1-.722-1.355" opacity="0.35"></path><path fill="currentColor" d="M3.333 5.209c-.425.315-.8.603-1.101.839-.502.392-.816.97-.859 1.606-.058.865-.124 2.316-.124 4.43 0 1.997.119 3.404.23 4.282.09.724.575 1.298 1.29 1.446 1.146.237 3.334.521 7.23.521s6.085-.284 7.23-.521c.716-.148 1.2-.722 1.291-1.446.111-.878.23-2.285.23-4.283 0-2.113-.067-3.564-.125-4.429a2.23 2.23 0 0 0-.858-1.606 56 56 0 0 0-1.101-.839v3.087c0 .545-.265 1.055-.722 1.354-1.41.925-4.52 2.85-5.945 2.85s-4.534-1.925-5.945-2.85a1.61 1.61 0 0 1-.721-1.354z"></path><path fill="currentColor" d="M5.833 4.792c0-.345.28-.625.625-.625h3.75a.625.625 0 1 1 0 1.25h-3.75a.625.625 0 0 1-.625-.625M5.833 7.708c0-.345.28-.625.625-.625h6.25a.625.625 0 1 1 0 1.25h-6.25a.625.625 0 0 1-.625-.625"></path></svg>'
-  
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M3.333 8.296V4.167a2.5 2.5 0 0 1 2.5-2.5h8.334a2.5 2.5 0 0 1 2.5 2.5v4.13c0 .545-.266 1.055-.722 1.354-1.41.924-4.52 2.85-5.945 2.85s-4.535-1.926-5.945-2.85a1.61 1.61 0 0 1-.722-1.355" opacity="0.35"></path><path fill="currentColor" d="M3.333 5.209c-.425.315-.8.603-1.101.839-.502.392-.816.97-.859 1.606-.058.865-.124 2.316-.124 4.43 0 1.997.119 3.404.23 4.282.09.724.575 1.298 1.29 1.446 1.146.237 3.334.521 7.23.521s6.085-.284 7.23-.521c.716-.148 1.2-.722 1.291-1.446.111-.878.23-2.285.23-4.283 0-2.113-.067-3.564-.125-4.429a2.23 2.23 0 0 0-.858-1.606 56 56 0 0 0-1.101-.839v3.087c0 .545-.265 1.055-.722 1.354-1.41.925-4.52 2.85-5.945 2.85s-4.534-1.925-5.945-2.85a1.61 1.61 0 0 1-.721-1.354z"></path><path fill="currentColor" d="M5.833 4.792c0-.345.28-.625.625-.625h3.75a.625.625 0 1 1 0 1.25h-3.75a.625.625 0 0 1-.625-.625M5.833 7.708c0-.345.28-.625.625-.625h6.25a.625.625 0 1 1 0 1.25h-6.25a.625.625 0 0 1-.625-.625"></path></svg>' 
   },
    {
      name: 'FA Summary',
@@ -292,6 +306,7 @@ const menuItems2 = [
      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" class=" h-5 w-5"><path fill="currentColor" d="M10 4.417v13.358a.84.84 0 0 1-.408-.092l-.034-.016c-1.6-.875-4.391-1.792-6.2-2.034l-.241-.033c-.8-.1-1.45-.85-1.45-1.65V3.883a1.64 1.64 0 0 1 1.8-1.658c1.75.142 4.4 1.025 5.883 1.95l.208.125a.9.9 0 0 0 .442.117" opacity="0.35"></path><path fill="currentColor" d="M18.333 3.891V13.95c0 .8-.65 1.55-1.45 1.65l-.275.033c-1.816.242-4.616 1.167-6.216 2.05a.74.74 0 0 1-.392.092V4.416a.9.9 0 0 0 .442-.116l.141-.092c1.484-.933 4.142-1.825 5.892-1.975h.05a1.642 1.642 0 0 1 1.808 1.658M6.458 7.7H4.583a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h1.875a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625M7.083 10.2h-2.5a.63.63 0 0 1-.625-.625.63.63 0 0 1 .625-.625h2.5a.63.63 0 0 1 .625.625.63.63 0 0 1-.625.625"></path></svg>'
    },
 ];
+
 const menuItems3 = [
   {
     name: 'Home',
@@ -366,9 +381,9 @@ const menuItems4 = [
   }
 ];
 
-
 const toggleSidebar = () => {
   debugger
+  
   if (isFixedSidebar.value) {
     isSidebarOpen.value = true;
   } else {
@@ -376,14 +391,11 @@ const toggleSidebar = () => {
   }
 };
 
-
-
 const openSidebar = () => {
   if (!isFixedSidebar.value) {
     isSidebarOpen.value = true;
   }
 };
-
 
 const handleMouseLeave = (event) => {
   const sidebar = document.getElementById('app-sidebar-10');
@@ -397,7 +409,6 @@ const changeActiveTab = (index) => {
   activeTab2.value = index;
 };
 
-
 watch(isFixedSidebar, (newValue) => {
   if (Array.isArray(newValue) && newValue.includes(true)) {
     isSidebarOpen.value = true;
@@ -406,36 +417,29 @@ watch(isFixedSidebar, (newValue) => {
     isFixedSidebar.value = false;
   }
 });
+
 onMounted(async () => {
+  const route = useRoute();  
+  const router = useRouter(); // Get the router instance
 
-  const route = useRoute();  // Access the current route
-  // Get values from route params or set static values if not available
-  clientName.value = route.query.clientName
-    ? route.query.clientName
-    : "";
-  clientcode.value = route.query.clientcode
-    ? route.query.clientcode
-    : "";
-  console.log(clientcode.value, "clientcode.value")
+  clientName.value = route.query.clientName ? route.query.clientName : "";
+  clientcode.value = route.query.clientcode ? route.query.clientcode : "";
+  console.log(clientcode.value, "clientcode.value");
 
-
+  // Clear the query parameters using router.replace
+  await router.replace({ path: route.path, query: {} });
 });
-
 
 </script>
 
 <style>
 * {
   font-family: 'Inter', sans-serif;
-  /* Add your custom font here */
 }
-
 
 .hidden {
   transform: translateX(-100%);
 }
-
-
 
 .p-checkbox-checked .p-checkbox-box {
   border-color: #2f449d !important;
@@ -449,19 +453,14 @@ onMounted(async () => {
 
 }
 
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateX(-20px);
-    /* Start from the left */
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
-    /* End at the original position */
   }
 }
 
@@ -469,32 +468,25 @@ onMounted(async () => {
   from {
     opacity: 1;
     transform: translateX(0);
-    /* Start at the original position */
   }
-
   to {
     opacity: 0;
     transform: translateX(-20px);
-    /* Move to the left */
   }
 }
 
 .fade-in {
   animation: fadeIn 0.3s forwards;
-  /* Adjust duration as needed */
 }
 
 .fade-out {
   animation: fadeOut 0.3s forwards;
-  /* Adjust duration as needed */
 }
 
-/* Add this to your existing styles */
 :root {
   font-family: 'Inter', sans-serif;
 }
 
-/* Or apply it specifically to your component */
 #app-sidebar-10 {
   font-family: 'Inter', sans-serif;
 }
